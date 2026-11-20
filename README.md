@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/title.png" alt="guest@neuromancer:~$ prompt with a glitched hostname, cyan accent" width="454">
+</p>
+
 # neuromancer
 
 [![CI](https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/actions/workflows/ci.yml/badge.svg)](https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/actions/workflows/ci.yml)
@@ -5,10 +9,6 @@
 
 A minimal, dark Jekyll theme inspired by hacker and cyberpunk culture.
 It's built for personal sites and blogs on GitHub Pages.
-
-```
-guest@neuromancer:~$ █
-```
 
 - Monospace type, neon accents, a terminal prompt header and a blinking cursor
 - Blog posts with reading time, tags and previous/next links
