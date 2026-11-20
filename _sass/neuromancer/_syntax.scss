@@ -21,7 +21,7 @@
   .k, .kc, .kd, .kn, .kp, .kr, .kv { color: var(--nm-syn-keyword); }
   .kt { color: var(--nm-syn-type); }
 
-  .s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .s1, .ss { color: var(--nm-syn-string); }
+  .s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .sx, .s1, .ss { color: var(--nm-syn-string); }
   .sr { color: var(--nm-syn-number); }
   .se, .si { color: var(--nm-syn-function); }
 
@@ -51,16 +51,7 @@
   .go { color: var(--nm-muted); }
   .gr, .gt { color: var(--nm-syn-error); }
 
-  .w { color: inherit; }
-
-  // Line numbers (kramdown `linenos` / {% highlight lang linenos %})
-  .lineno,
-  .gutter,
-  .rouge-gutter {
-    color: var(--nm-syn-comment);
-    user-select: none;
-  }
-
+  // Line numbers ({% highlight lang linenos %} / kramdown line_numbers)
   .rouge-table {
     display: table;
     width: auto;
@@ -74,6 +65,8 @@
     .rouge-gutter {
       padding-right: 1rem;
       text-align: right;
+      color: var(--nm-syn-comment);
+      user-select: none;
     }
   }
 }

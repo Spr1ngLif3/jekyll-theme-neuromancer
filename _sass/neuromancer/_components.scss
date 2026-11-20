@@ -240,7 +240,7 @@ figure.highlight:hover .copy-button,
 }
 
 .terminal p { margin: 0; }
-.terminal-out { color: var(--nm-fg-bright); margin-bottom: 0.6em !important; }
+.terminal .terminal-out { color: var(--nm-fg-bright); margin-bottom: 0.6em; }
 .ps1 { color: var(--nm-accent); margin-right: 0.5em; }
 
 // Post list --------------------------------------------------------------

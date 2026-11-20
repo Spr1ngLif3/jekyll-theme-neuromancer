@@ -14,11 +14,11 @@ script/cibuild     # build, validate HTML and build the gem (what CI runs)
 
 The repository is both the theme and its demo site:
 
-| path                         | shipped in the gem | purpose                    |
-|------------------------------|--------------------|----------------------------|
-| `_layouts/`, `_includes/`    | yes                | theme templates            |
-| `_sass/`, `assets/`          | yes                | styles, scripts, images    |
-| `_posts/`, `*.md`, `_config.yml` | no             | demo content & config      |
+| path                             | shipped in the gem | purpose                 |
+|----------------------------------|--------------------|-------------------------|
+| `_layouts/`, `_includes/`        | yes                | theme templates         |
+| `_sass/`, `assets/`              | yes                | styles, scripts, images |
+| `_posts/`, `*.md`, `_config.yml` | no                 | demo content & config   |
 
 ## Guidelines
 
