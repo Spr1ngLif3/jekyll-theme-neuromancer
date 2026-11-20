@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="container site-footer-inner">
+    {%- include social.html %}
+    <p class="site-footer-meta">
+      <span>&copy; {{ site.time | date: "%Y" }} {{ site.author.name | default: site.title | escape }}</span>
+      <span class="sep" aria-hidden="true">//</span>
+      <a href="{{ site.feed.path | default: 'feed.xml' | relative_url }}">rss</a>
+      {%- unless site.neuromancer.credit == false %}
+      <span class="sep" aria-hidden="true">//</span>
+      <span>powered by <a href="https://jekyllrb.com">jekyll</a> + <a href="https://github.com/Spr1ngLif3/jekyll-theme-neuromancer">neuromancer</a></span>
+      {%- endunless %}
+    </p>
+    <p class="eof" aria-hidden="true">[EOF]</p>
+  </div>
+</footer>

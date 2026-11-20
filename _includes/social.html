@@ -1,0 +1,7 @@
+{%- if site.neuromancer.social %}
+<ul class="social-links" aria-label="Elsewhere">
+  {%- for link in site.neuromancer.social %}
+  <li><a href="{{ link.url }}" rel="me noopener"{% if link.title %} title="{{ link.title | escape }}"{% endif %}>{{ link.name | escape }}</a></li>
+  {%- endfor %}
+</ul>
+{%- endif %}

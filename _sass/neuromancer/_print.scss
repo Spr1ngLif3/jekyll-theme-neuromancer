@@ -1,0 +1,27 @@
+@media print {
+  :root {
+    --nm-bg: #fff;
+    --nm-bg-alt: #f6f6f6;
+    --nm-bg-elev: #eee;
+    --nm-fg: #111;
+    --nm-fg-bright: #000;
+    --nm-muted: #555;
+    --nm-border: #ccc;
+    --nm-accent: #000;
+  }
+
+  .site-header,
+  .site-footer,
+  .post-nav,
+  .comments,
+  .copy-button,
+  .heading-anchor,
+  .cursor { display: none !important; }
+
+  [data-scanlines] body::after { display: none; }
+
+  .prose a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+}

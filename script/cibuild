@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Build the demo site, validate the generated HTML and build the gem.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+export JEKYLL_ENV=production
+
+bundle exec jekyll build --strict_front_matter --trace
+bundle exec htmlproofer ./_site --disable-external
+gem build jekyll-theme-neuromancer.gemspec

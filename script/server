@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Serve the demo site locally with live reload.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+bundle exec jekyll serve --livereload "$@"

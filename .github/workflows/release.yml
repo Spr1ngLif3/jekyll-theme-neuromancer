@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Verify tag matches gemspec version
+        run: |
+          version=$(ruby -e 'puts Gem::Specification.load("jekyll-theme-neuromancer.gemspec").version')
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match gemspec version ${version}"
+            exit 1
+          fi
+      - name: Build and test
+        run: script/cibuild
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" jekyll-theme-neuromancer-*.gem --title "$GITHUB_REF_NAME" --generate-notes

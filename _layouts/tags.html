@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<article class="page tags-index">
+  <header class="page-header">
+    <h1 class="page-title">{{ page.title | default: "tags" | escape }}</h1>
+  </header>
+
+  {%- assign body = content | strip %}
+  {%- if body != "" %}
+  <div class="prose">{{ content }}</div>
+  {%- endif %}
+
+  {%- assign tags = site.tags | sort %}
+  {%- if tags.size > 0 %}
+  <ul class="tag-cloud">
+    {%- for tag in tags %}
+    <li><a class="tag" href="#{{ tag[0] | slugify }}">{{ tag[0] | escape }}<span class="tag-count">{{ tag[1].size }}</span></a></li>
+    {%- endfor %}
+  </ul>
+
+  {%- for tag in tags %}
+  <section class="tag-group" id="{{ tag[0] | slugify }}" aria-labelledby="tag-{{ tag[0] | slugify }}">
+    <h2 id="tag-{{ tag[0] | slugify }}" class="section-title">#{{ tag[0] | escape }}</h2>
+    {%- assign tag_posts = tag[1] %}
+    {%- include post-list.html posts=tag_posts %}
+  </section>
+  {%- endfor %}
+  {%- else %}
+  <p class="muted">no tags yet.</p>
+  {%- endif %}
+</article>

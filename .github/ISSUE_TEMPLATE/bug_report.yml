@@ -1,0 +1,38 @@
+name: Bug report
+description: Something renders or behaves incorrectly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead? Screenshots help.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Set `neuromancer.accent: cyan`
+        2. Open a post with a table
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How do you use the theme?
+      options:
+        - remote_theme on GitHub Pages (classic build)
+        - remote_theme with GitHub Actions
+        - gem (theme:)
+        - other
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Theme version, Jekyll version, browser.
+      placeholder: neuromancer 0.1.0, Jekyll 4.4.1, Firefox 140

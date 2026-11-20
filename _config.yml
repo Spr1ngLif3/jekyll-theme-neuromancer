@@ -1,0 +1,108 @@
+# ---------------------------------------------------------------------------
+# Demo site configuration for jekyll-theme-neuromancer.
+# Everything under `neuromancer:` is a theme option — see README.md.
+# ---------------------------------------------------------------------------
+
+title: neuromancer
+description: >-
+  A minimal dark Jekyll theme for hackers, tinkerers and
+  denizens of the sprawl.
+url: ""        # e.g. https://username.github.io
+baseurl: ""    # e.g. /blog — leave empty for a user/organisation site
+lang: en
+timezone: UTC
+
+author:
+  name: anon
+  url: ""
+
+permalink: /:year/:month/:day/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+sass:
+  style: compressed
+  # The theme uses @import so it also compiles on classic GitHub Pages
+  # (libsass). Silence Dart Sass's @import deprecation notice on Jekyll 4.
+  quiet_deps: true
+  silence_deprecations: [import]
+
+neuromancer:
+  # Accent colour: green | cyan | magenta | amber | violet
+  accent: green
+  # Rendered in the header as <prompt_user>@<prompt_host>:~$
+  prompt_user: guest
+  # prompt_host: my-site     # defaults to the slugified site title
+  # Subtle CRT scanline overlay
+  scanlines: false
+  date_format: "%Y-%m-%d"
+  # Number of posts on the home page (0 hides the list)
+  home_posts: 5
+  show_excerpts: true
+  reading_time: true
+  words_per_minute: 200
+  archive_url: /blog/
+  tags_url: /tags/
+  # Show "powered by jekyll + neuromancer" in the footer
+  credit: true
+
+  nav:
+    - title: blog
+      url: /blog/
+    - title: tags
+      url: /tags/
+    - title: search
+      url: /search/
+    - title: about
+      url: /about/
+
+  social:
+    - name: github
+      url: https://github.com/Spr1ngLif3
+    - name: rss
+      url: /feed.xml
+
+  # Comments via giscus (https://giscus.app). Only rendered when
+  # JEKYLL_ENV=production and `repo` is set.
+  # comments:
+  #   giscus:
+  #     repo: username/repo
+  #     repo_id: R_xxxxxxxx
+  #     category: Comments
+  #     category_id: DIC_xxxxxxxx
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: page
+
+exclude:
+  - .github/
+  - .editorconfig
+  - CHANGELOG.md
+  - CONTRIBUTING.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.txt
+  - README.md
+  - SECURITY.md
+  - gemfiles/
+  - script/
+  - vendor/
+  - "*.gem"
+  - "*.gemspec"

@@ -1,0 +1,8 @@
+{%- if include.tags and include.tags.size > 0 %}
+{%- assign tags_url = site.neuromancer.tags_url | default: "/tags/" | relative_url %}
+<ul class="post-tags" aria-label="Tags">
+  {%- for tag in include.tags %}
+  <li><a class="tag p-category" href="{{ tags_url }}#{{ tag | slugify }}" rel="tag">{{ tag | escape }}</a></li>
+  {%- endfor %}
+</ul>
+{%- endif %}

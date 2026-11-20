@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<section class="home-intro" aria-label="Introduction">
+  {%- assign intro = content | strip -%}
+  {%- if intro != "" %}
+  <div class="prose">{{ content }}</div>
+  {%- else %}
+  <div class="terminal" role="presentation">
+    <p><span class="ps1">$</span> whoami</p>
+    <p class="terminal-out">{{ site.author.name | default: site.title | escape }}</p>
+    <p><span class="ps1">$</span> cat motd</p>
+    <p class="terminal-out">{{ site.description | escape }}</p>
+    <p><span class="ps1">$</span> <span class="cursor" aria-hidden="true"></span></p>
+  </div>
+  {%- endif %}
+</section>
+
+{%- assign home_posts = site.neuromancer.home_posts | default: 5 %}
+{%- if site.posts.size > 0 and home_posts > 0 %}
+<section class="home-posts" aria-labelledby="recent-posts">
+  <h2 id="recent-posts" class="section-title">{{ page.posts_title | default: "recent transmissions" }}</h2>
+  {%- include post-list.html posts=site.posts limit=home_posts excerpts=true %}
+  {%- if site.posts.size > home_posts %}
+  <p class="more-link"><a href="{{ site.neuromancer.archive_url | default: '/blog/' | relative_url }}">cd ./archive</a></p>
+  {%- endif %}
+</section>
+{%- endif %}

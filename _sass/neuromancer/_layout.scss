@@ -1,0 +1,107 @@
+.container {
+  width: 100%;
+  max-width: var(--nm-measure);
+  margin: 0 auto;
+  padding: 0 var(--nm-gutter);
+}
+
+// Header ---------------------------------------------------------------
+
+.site-header {
+  border-bottom: 1px solid var(--nm-border);
+}
+
+.site-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.site-title {
+  font-weight: 700;
+  color: var(--nm-fg-bright);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.site-title:hover {
+  background: none;
+  color: var(--nm-fg-bright);
+}
+
+.prompt-user { color: var(--nm-accent); }
+.prompt-at,
+.prompt-path { color: var(--nm-muted); }
+.prompt-host { color: var(--nm-fg-bright); }
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  color: var(--nm-muted);
+  text-decoration: none;
+}
+
+.site-nav a::before { content: "./"; opacity: 0.5; }
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--nm-accent);
+  background: none;
+}
+
+.site-nav a[aria-current="page"]::before { opacity: 1; }
+
+// Main -----------------------------------------------------------------
+
+.site-main {
+  flex: 1 0 auto;
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+.site-main:focus { outline: none; }
+
+// Footer ---------------------------------------------------------------
+
+.site-footer {
+  border-top: 1px solid var(--nm-border);
+  color: var(--nm-muted);
+  font-size: 0.85rem;
+}
+
+.site-footer-inner {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.site-footer a { color: var(--nm-muted); }
+.site-footer a:hover { color: var(--nm-on-accent); }
+
+.site-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  margin: 0;
+}
+
+.eof {
+  margin: 1rem 0 0;
+  color: var(--nm-border);
+  font-size: 0.75rem;
+}
+
+.sep { color: var(--nm-border); }

@@ -1,0 +1,54 @@
+// Design tokens. Everything visual is driven by CSS custom properties so
+// sites can re-theme from _sass/neuromancer/_custom.scss without Sass.
+
+:root {
+  color-scheme: dark;
+
+  --nm-bg: #07080c;
+  --nm-bg-alt: #0d0f16;
+  --nm-bg-elev: #141824;
+  --nm-border: #1e2433;
+  --nm-fg: #c5cfdc;
+  --nm-fg-bright: #eef3f9;
+  --nm-muted: #7f89a0;
+
+  --nm-accent: #00ff9c;
+  --nm-accent-soft: rgba(0, 255, 156, 0.12);
+  --nm-accent-2: #ff2a6d;
+  --nm-on-accent: #04060a;
+
+  --nm-font-mono: "JetBrains Mono", "Fira Code", "IBM Plex Mono", "Cascadia Code",
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --nm-font-body: var(--nm-font-mono);
+
+  --nm-font-size: 15px;
+  --nm-line-height: 1.75;
+  --nm-measure: 46rem;
+  --nm-gutter: 1.25rem;
+  --nm-radius: 2px;
+}
+
+// Accent presets, selected with `neuromancer.accent` in _config.yml.
+[data-accent="cyan"] {
+  --nm-accent: #00e5ff;
+  --nm-accent-soft: rgba(0, 229, 255, 0.12);
+  --nm-accent-2: #ff2a6d;
+}
+
+[data-accent="magenta"] {
+  --nm-accent: #ff4f8b;
+  --nm-accent-soft: rgba(255, 79, 139, 0.13);
+  --nm-accent-2: #00e5ff;
+}
+
+[data-accent="amber"] {
+  --nm-accent: #ffb000;
+  --nm-accent-soft: rgba(255, 176, 0, 0.12);
+  --nm-accent-2: #ff4f8b;
+}
+
+[data-accent="violet"] {
+  --nm-accent: #b98cff;
+  --nm-accent-soft: rgba(185, 140, 255, 0.14);
+  --nm-accent-2: #00e5ff;
+}

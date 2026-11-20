@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<article class="page archive">
+  <header class="page-header">
+    <h1 class="page-title">{{ page.title | default: "archive" | escape }}</h1>
+    <p class="page-subtitle">{{ site.posts.size }} {% if site.posts.size == 1 %}entry{% else %}entries{% endif %} found</p>
+  </header>
+
+  {%- assign body = content | strip %}
+  {%- if body != "" %}
+  <div class="prose">{{ content }}</div>
+  {%- endif %}
+
+  {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  {%- for year in years %}
+  <section class="archive-year" aria-labelledby="year-{{ year.name }}">
+    <h2 id="year-{{ year.name }}" class="section-title">{{ year.name }}</h2>
+    {%- include post-list.html posts=year.items %}
+  </section>
+  {%- endfor %}
+</article>

@@ -1,0 +1,25 @@
+{%- comment -%}
+  Renders a list of posts.
+  Params:
+    posts    (required) array of posts
+    limit    (optional) max number of posts to show
+    excerpts (optional) show post excerpts when true
+{%- endcomment -%}
+{%- assign date_format = site.neuromancer.date_format | default: "%Y-%m-%d" -%}
+{%- assign limit = include.limit | default: include.posts.size -%}
+<ul class="post-list">
+  {%- for post in include.posts limit: limit %}
+  <li class="post-list-item">
+    <time class="post-list-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: date_format }}</time>
+    <div class="post-list-body">
+      <a class="post-list-title" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+      {%- if include.excerpts and site.neuromancer.show_excerpts != false %}
+      {%- assign excerpt = post.description | default: post.excerpt | strip_html | strip | truncatewords: 30 %}
+      {%- if excerpt != "" %}
+      <p class="post-list-excerpt">{{ excerpt }}</p>
+      {%- endif %}
+      {%- endif %}
+    </div>
+  </li>
+  {%- endfor %}
+</ul>

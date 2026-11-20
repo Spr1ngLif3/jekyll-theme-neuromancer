@@ -1,0 +1,26 @@
+{%- comment -%}
+  Optional comments powered by giscus (https://giscus.app).
+  Enabled when site.neuromancer.comments.giscus.repo is set and the page
+  does not set `comments: false`.
+{%- endcomment -%}
+{%- assign giscus = site.neuromancer.comments.giscus -%}
+{%- if giscus.repo and page.comments != false and jekyll.environment == "production" %}
+<section class="comments" aria-labelledby="comments-title">
+  <h2 id="comments-title" class="section-title">comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ giscus.repo }}"
+    data-repo-id="{{ giscus.repo_id }}"
+    data-category="{{ giscus.category }}"
+    data-category-id="{{ giscus.category_id }}"
+    data-mapping="{{ giscus.mapping | default: 'pathname' }}"
+    data-strict="1"
+    data-reactions-enabled="{{ giscus.reactions | default: '1' }}"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="{{ giscus.theme | default: 'transparent_dark' }}"
+    data-lang="{{ giscus.lang | default: site.lang | default: 'en' }}"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+</section>
+{%- endif %}

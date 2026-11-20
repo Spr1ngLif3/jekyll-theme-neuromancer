@@ -1,0 +1,28 @@
+{%- assign prompt_user = site.neuromancer.prompt_user | default: "guest" -%}
+{%- assign prompt_host = site.neuromancer.prompt_host | default: site.title | slugify -%}
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a class="site-title" href="{{ '/' | relative_url }}" rel="home" aria-label="{{ site.title | escape }} (home)">
+      <span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host" data-text="{{ prompt_host | escape }}">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>
+    </a>
+    {%- if site.neuromancer.nav %}
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {%- for item in site.neuromancer.nav %}
+        {%- assign item_url = item.url | relative_url %}
+        {%- assign is_external = item.url | slice: 0, 4 %}
+        {%- if is_external == "http" %}{% assign item_url = item.url %}{% endif %}
+        {%- assign current = false %}
+        {%- if page.url == item.url %}{% assign current = true %}
+        {%- elsif item.url != "/" and is_external != "http" %}
+          {%- assign prefix_len = item.url | size %}
+          {%- assign page_prefix = page.url | slice: 0, prefix_len %}
+          {%- if page_prefix == item.url %}{% assign current = true %}{% endif %}
+        {%- endif %}
+        <li><a href="{{ item_url }}"{% if current %} aria-current="page"{% endif %}>{{ item.title | escape }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    {%- endif %}
+  </div>
+</header>

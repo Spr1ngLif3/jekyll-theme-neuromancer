@@ -1,0 +1,79 @@
+// Rouge syntax highlighting — "neon" palette.
+
+:root {
+  --nm-syn-comment: #5c6680;
+  --nm-syn-keyword: #ff4f8b;
+  --nm-syn-string: #00ff9c;
+  --nm-syn-number: #ffb000;
+  --nm-syn-function: #00e5ff;
+  --nm-syn-type: #b98cff;
+  --nm-syn-variable: #eef3f9;
+  --nm-syn-operator: #8fa3c0;
+  --nm-syn-error: #ff2a6d;
+}
+
+.highlight {
+  color: var(--nm-fg);
+
+  .c, .ch, .cd, .cm, .cpf, .c1, .cs { color: var(--nm-syn-comment); font-style: italic; }
+  .cp { color: var(--nm-syn-keyword); }
+
+  .k, .kc, .kd, .kn, .kp, .kr, .kv { color: var(--nm-syn-keyword); }
+  .kt { color: var(--nm-syn-type); }
+
+  .s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .s1, .ss { color: var(--nm-syn-string); }
+  .sr { color: var(--nm-syn-number); }
+  .se, .si { color: var(--nm-syn-function); }
+
+  .m, .mb, .mf, .mh, .mi, .il, .mo, .mx { color: var(--nm-syn-number); }
+
+  .na { color: var(--nm-syn-function); }
+  .nb, .bp { color: var(--nm-syn-function); }
+  .nc, .nn, .ne { color: var(--nm-syn-type); }
+  .nd { color: var(--nm-syn-number); }
+  .nf, .fm { color: var(--nm-syn-function); }
+  .nl { color: var(--nm-syn-number); }
+  .no { color: var(--nm-syn-number); }
+  .nt { color: var(--nm-syn-keyword); }
+  .nv, .vc, .vg, .vi, .vm { color: var(--nm-syn-variable); }
+
+  .o, .ow { color: var(--nm-syn-operator); }
+  .p { color: var(--nm-syn-operator); }
+
+  .err { color: var(--nm-syn-error); }
+
+  .gd { color: var(--nm-syn-error); background: rgba(255, 42, 109, 0.1); }
+  .gi { color: var(--nm-syn-string); background: rgba(0, 255, 156, 0.08); }
+  .gh, .gu { color: var(--nm-syn-function); font-weight: 700; }
+  .ge { font-style: italic; }
+  .gs { font-weight: 700; }
+  .gp { color: var(--nm-accent); user-select: none; }
+  .go { color: var(--nm-muted); }
+  .gr, .gt { color: var(--nm-syn-error); }
+
+  .w { color: inherit; }
+
+  // Line numbers (kramdown `linenos` / {% highlight lang linenos %})
+  .lineno,
+  .gutter,
+  .rouge-gutter {
+    color: var(--nm-syn-comment);
+    user-select: none;
+  }
+
+  .rouge-table {
+    display: table;
+    width: auto;
+    margin: 0;
+    border: 0;
+    border-collapse: collapse;
+    font-size: inherit;
+    td { padding: 0; border: 0; vertical-align: top; }
+    pre { margin: 0; padding: 0; border: 0; background: none; overflow: visible; }
+    .gutter,
+    .rouge-gutter {
+      padding-right: 1rem;
+      text-align: right;
+    }
+  }
+}

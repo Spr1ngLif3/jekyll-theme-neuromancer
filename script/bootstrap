@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Install development dependencies into ./vendor/bundle.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+bundle config set --local path vendor/bundle
+bundle install

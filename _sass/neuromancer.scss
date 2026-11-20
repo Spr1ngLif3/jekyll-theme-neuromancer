@@ -1,0 +1,13 @@
+// Neuromancer — a minimal dark Jekyll theme.
+// Partials are imported with @import for compatibility with libsass,
+// which is what classic GitHub Pages builds still use.
+
+@import
+  "neuromancer/variables",
+  "neuromancer/base",
+  "neuromancer/layout",
+  "neuromancer/components",
+  "neuromancer/syntax",
+  "neuromancer/effects",
+  "neuromancer/print",
+  "neuromancer/custom";

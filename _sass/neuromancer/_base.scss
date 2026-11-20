@@ -1,0 +1,141 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--nm-font-size);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--nm-bg);
+  color: var(--nm-fg);
+  font-family: var(--nm-font-body);
+  line-height: var(--nm-line-height);
+  font-variant-ligatures: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--nm-accent);
+  color: var(--nm-on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--nm-accent);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--nm-fg-bright);
+  font-family: var(--nm-font-mono);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 2.2em 0 0.8em;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.15rem; }
+h4,
+h5,
+h6 { font-size: 1rem; }
+
+p,
+ul,
+ol,
+dl,
+table,
+pre,
+blockquote,
+figure {
+  margin: 0 0 1.25em;
+}
+
+a {
+  color: var(--nm-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--nm-accent-soft);
+  transition: color 0.12s, background-color 0.12s, text-decoration-color 0.12s;
+}
+
+a:hover {
+  color: var(--nm-on-accent);
+  background: var(--nm-accent);
+  text-decoration-color: transparent;
+}
+
+strong { color: var(--nm-fg-bright); }
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  margin: 2.5em 0;
+  background: repeating-linear-gradient(90deg, var(--nm-border) 0 6px, transparent 6px 10px);
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+kbd {
+  font: inherit;
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--nm-border);
+  border-bottom-width: 2px;
+  border-radius: var(--nm-radius);
+  background: var(--nm-bg-elev);
+}
+
+mark {
+  background: var(--nm-accent-soft);
+  color: var(--nm-fg-bright);
+}
+
+.muted { color: var(--nm-muted); }
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -3rem;
+  z-index: 1000;
+  padding: 0.4rem 0.8rem;
+  background: var(--nm-accent);
+  color: var(--nm-on-accent);
+}
+
+.skip-link:focus { top: 0.5rem; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
