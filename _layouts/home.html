@@ -7,11 +7,19 @@ layout: default
   <div class="prose">{{ content }}</div>
   {%- else %}
   <div class="terminal" role="presentation">
+    {%- if site.neuromancer.terminal %}
+    {%- for line in site.neuromancer.terminal %}
+    <p><span class="ps1">$</span> {{ line.command | escape }}</p>
+    {%- if line.output %}
+    <p class="terminal-out">{{ line.output | escape }}</p>
+    {%- endif %}
+    {%- endfor %}
+    {%- else %}
     <p><span class="ps1">$</span> whoami</p>
     <p class="terminal-out">{{ site.author.name | default: site.title | escape }}</p>
     <p><span class="ps1">$</span> cat motd</p>
     <p class="terminal-out">{{ site.description | escape }}</p>
-    <p><span class="ps1">$</span> <span class="cursor" aria-hidden="true"></span></p>
+    {%- endif %}
   </div>
   {%- endif %}
 </section>

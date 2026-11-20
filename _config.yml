@@ -54,6 +54,17 @@ neuromancer:
   # Show "powered by jekyll + neuromancer" in the footer
   credit: true
 
+  # Shell session shown on the home page. Each entry is a `command` and an
+  # optional `output` (multi-line output is preserved). When omitted, the
+  # block shows `whoami` (author name) and `cat motd` (site description).
+  terminal:
+    - command: whoami
+      output: anon
+    - command: cat motd
+      output: >-
+        A minimal dark Jekyll theme for hackers, tinkerers and
+        denizens of the sprawl.
+
   nav:
     - title: blog
       url: /blog/

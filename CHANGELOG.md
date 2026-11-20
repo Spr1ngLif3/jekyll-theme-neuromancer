@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `neuromancer.terminal` option to configure the home page shell session.
+
+### Removed
+
+- Blinking cursor line at the end of the home page terminal block.
+
 ## [0.1.0] - 2026-11-20
 
 ### Added

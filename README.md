@@ -93,6 +93,12 @@ neuromancer:
   favicon: /assets/images/favicon.svg
   credit: true            # "powered by jekyll + neuromancer" in the footer
 
+  terminal:               # shell session on the home page
+    - command: whoami     # default: author name
+      output: anon
+    - command: cat motd   # default: site description
+      output: notes from the sprawl
+
   nav:
     - title: blog
       url: /blog/
@@ -149,8 +155,8 @@ defaults:
 | `posts_title`      | home        | heading above the recent-posts list            |
 | `image`            | all         | social preview image (via jekyll-seo-tag)      |
 
-If a `layout: home` page has content, that content replaces the default
-`whoami` terminal block.
+If a `layout: home` page has content, that content replaces the terminal
+block.
 
 ## Customization
 
