@@ -4,7 +4,7 @@
 
 # neuromancer
 
-[![CI](https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/actions/workflows/ci.yml/badge.svg)](https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/actions/workflows/ci.yml)
+[![GitHub stars](https://img.shields.io/github/stars/Spr1ngLif3/jekyll-theme-neuromancer?style=flat&color=00ff9c)](https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-00ff9c.svg)](LICENSE.txt)
 
 A minimal, dark Jekyll theme inspired by hacker and cyberpunk culture.
