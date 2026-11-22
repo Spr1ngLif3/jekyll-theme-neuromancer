@@ -36,7 +36,7 @@ plugins:
   - jekyll-sitemap
 ```
 
-To pin a release, use `remote_theme: Spr1ngLif3/jekyll-theme-neuromancer@v0.1.0`.
+To pin a release, use `remote_theme: Spr1ngLif3/jekyll-theme-neuromancer@v0.2.0`.
 
 ### As a gem
 
