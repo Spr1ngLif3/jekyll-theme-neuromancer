@@ -101,7 +101,7 @@ neuromancer:
     - command: cat motd   # default: site description
       output: notes from the sprawl
 
-  nav:
+  nav:                    # a "home" link is always added first
     - title: blog
       url: /blog/
     - title: about

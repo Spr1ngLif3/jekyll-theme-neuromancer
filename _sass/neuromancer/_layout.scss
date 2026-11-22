@@ -21,16 +21,10 @@
 }
 
 .site-title {
-  margin-right: 9rem; // room for the theme toggle on small screens
+  margin-right: 7rem; // room for the theme toggle on small screens
   font-weight: 700;
   color: var(--nm-fg-bright);
-  text-decoration: none;
   overflow-wrap: anywhere;
-}
-
-.site-title:hover {
-  background: none;
-  color: var(--nm-fg-bright);
 }
 
 .prompt-user { color: var(--nm-accent); }
@@ -77,7 +71,11 @@
   cursor: pointer;
 }
 
-.theme-toggle:hover { color: var(--nm-accent); }
+.theme-toggle:hover { color: var(--nm-fg-bright); }
+
+// Highlight the active scheme (data-current is set by neuromancer.js).
+.theme-toggle[data-current="light"] .theme-light,
+.theme-toggle[data-current="dark"] .theme-dark { color: var(--nm-accent); }
 
 .site-nav a[aria-current="page"]::before {
   content: ">";

@@ -16,8 +16,7 @@
 
 // Glitch on site title hover ---------------------------------------------
 
-.site-title:hover .prompt-host,
-.site-title:focus-visible .prompt-host {
+.site-title:hover .prompt-host {
   animation: nm-glitch 0.45s steps(2, end) 2;
 }
 

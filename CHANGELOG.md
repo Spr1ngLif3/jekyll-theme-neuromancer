@@ -11,12 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Light colour scheme using the same accent hues, tuned to pass WCAG AA.
   `neuromancer.color_scheme` (`dark` | `light` | `auto`) sets the default.
-- Light/dark toggle at the bottom of the sidebar (`neuromancer.theme_toggle`).
+- `light / dark` toggle at the bottom of the sidebar, highlighting the active
+  scheme (`neuromancer.theme_toggle`).
   The visitor's choice is saved in localStorage and applied before first paint.
 
 - `neuromancer.terminal` option to configure the home page shell session.
 
 ### Changed
+
+- A `home` link is always the first navigation item; the site title is no
+  longer a link. `/` entries in `neuromancer.nav` are skipped.
 
 - Navigation moved from a top bar to a sticky left sidebar on wide screens
   (stacked header on small screens); `./` prefix removed from nav items.

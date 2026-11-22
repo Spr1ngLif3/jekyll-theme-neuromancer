@@ -67,9 +67,9 @@
     var meta = document.querySelector('meta[name="theme-color"]');
 
     function render() {
-      var next = currentTheme() === "dark" ? "light" : "dark";
-      button.textContent = "$ theme --" + next;
-      button.setAttribute("aria-label", "Switch to " + next + " theme");
+      var current = currentTheme();
+      button.setAttribute("data-current", current);
+      button.setAttribute("aria-label", "Switch to " + (current === "dark" ? "light" : "dark") + " theme");
       if (meta) meta.content = getComputedStyle(root).getPropertyValue("--nm-bg").trim();
     }
 

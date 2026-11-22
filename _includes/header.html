@@ -1,29 +1,31 @@
 {%- assign prompt_user = site.neuromancer.prompt_user | default: "guest" -%}
 {%- assign prompt_host = site.neuromancer.prompt_host | default: site.title | slugify -%}
 <header class="site-header">
-  <a class="site-title" href="{{ '/' | relative_url }}" rel="home" aria-label="{{ site.title | escape }} (home)">
+  <div class="site-title">
     <span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>
-  </a>
-  {%- if site.neuromancer.nav %}
+  </div>
   <nav class="site-nav" aria-label="Main">
     <ul>
+      <li><a href="{{ '/' | relative_url }}" rel="home"{% if page.url == "/" %} aria-current="page"{% endif %}>home</a></li>
       {%- for item in site.neuromancer.nav %}
+      {%- if item.url == "/" %}{% continue %}{% endif %}{% comment %} home is always first {% endcomment %}
       {%- assign current = false %}
       {%- if item.url contains "://" %}
         {%- assign href = item.url %}
       {%- else %}
         {%- assign href = item.url | relative_url %}
         {%- assign prefix = page.url | slice: 0, item.url.size %}
-        {%- comment %} Current when on the item's URL or below it (except for "/"). {% endcomment %}
-        {%- if page.url == item.url or item.url != "/" and prefix == item.url %}{% assign current = true %}{% endif %}
+        {%- comment %} Current when on the item's URL or below it. {% endcomment %}
+        {%- if page.url == item.url or prefix == item.url %}{% assign current = true %}{% endif %}
       {%- endif %}
       <li><a href="{{ href }}"{% if current %} aria-current="page"{% endif %}>{{ item.title | escape }}</a></li>
       {%- endfor %}
     </ul>
   </nav>
-  {%- endif %}
   {%- include social.html rss=true %}
   {%- unless site.neuromancer.theme_toggle == false %}
-  <button class="theme-toggle" type="button" hidden>toggle theme</button>
+  <button class="theme-toggle" type="button" hidden>
+    <span class="theme-light">light</span> / <span class="theme-dark">dark</span>
+  </button>
   {%- endunless %}
 </header>
