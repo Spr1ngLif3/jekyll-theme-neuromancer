@@ -1,27 +1,26 @@
 {%- assign prompt_user = site.neuromancer.prompt_user | default: "guest" -%}
 {%- assign prompt_host = site.neuromancer.prompt_host | default: site.title | slugify -%}
 <header class="site-header">
-  <div class="container site-header-inner">
-    <a class="site-title" href="{{ '/' | relative_url }}" rel="home" aria-label="{{ site.title | escape }} (home)">
-      <span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>
-    </a>
-    {%- if site.neuromancer.nav %}
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        {%- for item in site.neuromancer.nav %}
-        {%- assign current = false %}
-        {%- if item.url contains "://" %}
-          {%- assign href = item.url %}
-        {%- else %}
-          {%- assign href = item.url | relative_url %}
-          {%- assign prefix = page.url | slice: 0, item.url.size %}
-          {%- comment %} Current when on the item's URL or below it (except for "/"). {% endcomment %}
-          {%- if page.url == item.url or item.url != "/" and prefix == item.url %}{% assign current = true %}{% endif %}
-        {%- endif %}
-        <li><a href="{{ href }}"{% if current %} aria-current="page"{% endif %}>{{ item.title | escape }}</a></li>
-        {%- endfor %}
-      </ul>
-    </nav>
-    {%- endif %}
-  </div>
+  <a class="site-title" href="{{ '/' | relative_url }}" rel="home" aria-label="{{ site.title | escape }} (home)">
+    <span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>
+  </a>
+  {%- if site.neuromancer.nav %}
+  <nav class="site-nav" aria-label="Main">
+    <ul>
+      {%- for item in site.neuromancer.nav %}
+      {%- assign current = false %}
+      {%- if item.url contains "://" %}
+        {%- assign href = item.url %}
+      {%- else %}
+        {%- assign href = item.url | relative_url %}
+        {%- assign prefix = page.url | slice: 0, item.url.size %}
+        {%- comment %} Current when on the item's URL or below it (except for "/"). {% endcomment %}
+        {%- if page.url == item.url or item.url != "/" and prefix == item.url %}{% assign current = true %}{% endif %}
+      {%- endif %}
+      <li><a href="{{ href }}"{% if current %} aria-current="page"{% endif %}>{{ item.title | escape }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+  {%- endif %}
+  {%- include social.html rss=true %}
 </header>

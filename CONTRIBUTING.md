@@ -37,7 +37,7 @@ The repository is both the theme and its demo site:
 
 ## Commits and pull requests
 
-- Branch from `main`; keep pull requests focused on one change.
+- Branch from `master`; keep pull requests focused on one change.
 - Use [Conventional Commits](https://www.conventionalcommits.org/)
   (`feat:`, `fix:`, `docs:`, `chore:` ...).
 - CI must pass: it builds the demo site with Jekyll 4 and with the

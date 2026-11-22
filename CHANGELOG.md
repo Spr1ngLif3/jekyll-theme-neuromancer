@@ -11,6 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `neuromancer.terminal` option to configure the home page shell session.
 
+### Changed
+
+- Navigation moved from a top bar to a sticky left sidebar on wide screens
+  (stacked header on small screens); `./` prefix removed from nav items.
+- Social links and the RSS link moved from the footer to the bottom of the
+  sidebar. The RSS link is added automatically; remove any `rss` entry from
+  `neuromancer.social` to avoid a duplicate.
+- `--nm-measure` now includes the content column's padding; new
+  `--nm-sidebar` token sets the sidebar width.
+
 ### Removed
 
 - Blinking cursor line at the end of the home page terminal block.

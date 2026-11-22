@@ -10,7 +10,7 @@
 A minimal, dark Jekyll theme inspired by hacker and cyberpunk culture.
 It's built for personal sites and blogs on GitHub Pages.
 
-- Monospace type, neon accents, a terminal prompt header and a blinking cursor
+- Monospace type, neon accents, and a sticky sidebar with a terminal prompt and blinking cursor
 - Blog posts with reading time, tags and previous/next links
 - Archive grouped by year, a tag index, and client-side search
 - RSS, sitemap and SEO tags through the official Jekyll plugins
