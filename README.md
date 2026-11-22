@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/assets/title.png" alt="guest@neuromancer:~$ prompt with a glitched hostname, cyan accent" width="454">
+  <img src=".github/assets/title.png" alt="guest@neuromancer:~$ prompt with a glitched hostname, cyan accent" width="443">
 </p>
 
 # neuromancer
@@ -10,14 +10,15 @@
 A minimal, dark Jekyll theme inspired by hacker and cyberpunk culture.
 It's built for personal sites and blogs on GitHub Pages.
 
-- Monospace type, neon accents, and a sticky sidebar with a terminal prompt and blinking cursor
-- Blog posts with reading time, tags and previous/next links
-- Archive grouped by year, a tag index, and client-side search
+- All-monospace typography (self-hosted IBM Plex Mono) with a clear size and colour hierarchy
+- Neon accents and a sticky sidebar with a terminal prompt and blinking cursor
+- Blog posts with tags and previous/next links
+- Archive grouped by year, a tag index, and a client-side search box on every page
 - RSS, sitemap and SEO tags through the official Jekyll plugins
 - Neon syntax highlighting with language labels and copy buttons
 - Dark and light schemes with a toggle, five accent colours, and an optional CRT scanline overlay
 - Accessible: skip link, visible focus, AA contrast, reduced-motion support, print styles
-- No web fonts, no trackers, no frameworks, and the JavaScript is optional
+- Self-hosted fonts (no third-party requests), no trackers, no frameworks, and the JavaScript is optional
 - Works on classic GitHub Pages (Jekyll 3.10, libsass) and on Jekyll 4
 
 ## Installation
@@ -61,9 +62,9 @@ lines of front matter:
 |-------------|-----------------------------------------------------------|
 | `index.md`  | `layout: home`                                            |
 | `about.md`  | `layout: page`, `title: about`, `permalink: /about/`      |
-| `blog.md`   | `layout: archive`, `title: archive`, `permalink: /blog/`  |
+| `blog.md`   | `layout: archive`, `title: works`, `permalink: /blog/`    |
 | `tags.md`   | `layout: tags`, `title: tags`, `permalink: /tags/`        |
-| `search.md` | `layout: search`, `title: search`, `permalink: /search/`  |
+| `search.md` | `layout: search`, `title: search`, `permalink: /search/` (full results, opened with Enter) |
 | `404.md`    | `layout: page`, `title: "404"`, `permalink: /404.html`    |
 
 The demo pages in this repository are good starting points.
@@ -90,10 +91,10 @@ neuromancer:
   date_format: "%Y-%m-%d"
   home_posts: 5           # posts listed on the home page (0 hides the list)
   show_excerpts: true     # excerpts in the home page list
-  reading_time: true
-  words_per_minute: 200
   archive_url: /blog/
   tags_url: /tags/
+  search: true            # search box in the top-right corner ("/" focuses it)
+  search_url: /search/    # full results page opened with Enter
   favicon: /assets/images/favicon.svg
   credit: true            # "powered by jekyll + neuromancer" in the footer
 
@@ -152,11 +153,11 @@ defaults:
 | `title`            | all         | page/post title                                |
 | `description`      | posts       | used for SEO and as the excerpt in lists       |
 | `tags`             | posts       | listed under the post and on the tag index     |
-| `last_modified_at` | posts       | shows an "updated" date                        |
+| `last_modified_at` | posts       | modification date for SEO metadata             |
 | `author`           | posts       | overrides `site.author.name`                   |
 | `comments: false`  | posts       | turns off comments for one post                |
 | `subtitle`         | pages       | line under the page title                      |
-| `posts_title`      | home        | heading above the recent-posts list            |
+| `posts_title`      | home        | heading above the post list (default "recent works") |
 | `image`            | all         | social preview image (via jekyll-seo-tag)      |
 
 If a `layout: home` page has content, that content replaces the terminal
@@ -171,8 +172,9 @@ block.
   :root {
     --nm-accent: #39ff14;
     --nm-accent-soft: rgba(57, 255, 20, 0.12);
-    --nm-font-body: system-ui, sans-serif;  // sans-serif body, mono UI
-    --nm-measure: 52rem;                     // wider content column
+    --nm-font-body: system-ui, sans-serif;   // sans-serif instead of mono
+    --nm-content: 72rem;                     // wider content area
+    --nm-measure: 80ch;                      // longer reading lines
     --nm-avatar-size: 10rem;                 // bigger sidebar image
   }
   ```
@@ -199,4 +201,5 @@ The repository doubles as the theme's demo site. Only `_layouts`,
 
 ## License
 
-[MIT](LICENSE.txt)
+[MIT](LICENSE.txt). The bundled [IBM Plex Mono](https://github.com/IBM/plex) font is
+licensed under the SIL Open Font License 1.1 (see `assets/fonts/`).

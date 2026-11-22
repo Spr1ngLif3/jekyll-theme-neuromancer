@@ -9,15 +9,15 @@ layout: default
   <div class="terminal" role="presentation">
     {%- if site.neuromancer.terminal %}
     {%- for line in site.neuromancer.terminal %}
-    <p><span class="ps1">$</span> {{ line.command | escape }}</p>
+    <p class="terminal-cmd">{{ line.command | escape }}</p>
     {%- if line.output %}
-    <p class="terminal-out">{{ line.output | escape }}</p>
+    <p class="terminal-out{% if forloop.first %} terminal-hero{% endif %}">{{ line.output | escape }}</p>
     {%- endif %}
     {%- endfor %}
     {%- else %}
-    <p><span class="ps1">$</span> whoami</p>
-    <p class="terminal-out">{{ site.author.name | default: site.title | escape }}</p>
-    <p><span class="ps1">$</span> cat motd</p>
+    <p class="terminal-cmd">whoami</p>
+    <p class="terminal-out terminal-hero">{{ site.author.name | default: site.title | escape }}</p>
+    <p class="terminal-cmd">cat motd</p>
     <p class="terminal-out">{{ site.description | escape }}</p>
     {%- endif %}
   </div>
@@ -27,8 +27,8 @@ layout: default
 {%- assign home_posts = site.neuromancer.home_posts | default: 5 %}
 {%- if site.posts.size > 0 and home_posts > 0 %}
 <section class="home-posts" aria-labelledby="recent-posts">
-  <h2 id="recent-posts" class="section-title">{{ page.posts_title | default: "recent transmissions" }}</h2>
-  {%- include post-list.html posts=site.posts limit=home_posts excerpts=true %}
+  <h2 id="recent-posts" class="section-title home-posts-title">{{ page.posts_title | default: "recent works" | escape }}</h2>
+  {%- include post-list.html posts=site.posts limit=home_posts excerpts=true dates=false grid=true %}
   {%- if site.posts.size > home_posts %}
   <p class="more-link"><a href="{{ site.neuromancer.archive_url | default: '/blog/' | relative_url }}">cd ./archive</a></p>
   {%- endif %}
