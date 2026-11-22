@@ -23,4 +23,7 @@
   </nav>
   {%- endif %}
   {%- include social.html rss=true %}
+  {%- unless site.neuromancer.theme_toggle == false %}
+  <button class="theme-toggle" type="button" hidden>toggle theme</button>
+  {%- endunless %}
 </header>

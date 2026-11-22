@@ -2,12 +2,15 @@
  * Neuromancer theme — progressive enhancements.
  * - language labels and copy buttons on code blocks
  * - permalink anchors on headings inside posts
+ * - light/dark theme toggle (choice saved in localStorage)
  * The site is fully usable without this script.
  */
 (function () {
   "use strict";
 
   var PLAIN = ["plaintext", "text"];
+  var THEME_KEY = "nm-theme";
+  var root = document.documentElement;
 
   function enhanceCodeBlock(block) {
     // Fenced blocks carry `language-x` on the wrapper; {% highlight %} puts data-lang on <code>.
@@ -55,9 +58,37 @@
     heading.appendChild(anchor);
   }
 
+  function currentTheme() {
+    return root.getAttribute("data-theme") ||
+      (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  }
+
+  function setupThemeToggle(button) {
+    var meta = document.querySelector('meta[name="theme-color"]');
+
+    function render() {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      button.textContent = "$ theme --" + next;
+      button.setAttribute("aria-label", "Switch to " + next + " theme");
+      if (meta) meta.content = getComputedStyle(root).getPropertyValue("--nm-bg").trim();
+    }
+
+    button.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* storage blocked: not persisted */ }
+      render();
+    });
+
+    render();
+    button.hidden = false;
+  }
+
   function init() {
     document.querySelectorAll("div.highlighter-rouge, figure.highlight").forEach(enhanceCodeBlock);
     document.querySelectorAll(".post .prose :is(h2, h3, h4)[id]").forEach(addHeadingAnchor);
+    var toggle = document.querySelector(".theme-toggle");
+    if (toggle) setupThemeToggle(toggle);
   }
 
   if (document.readyState === "loading") {

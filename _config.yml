@@ -38,6 +38,10 @@ sass:
 neuromancer:
   # Accent colour: green | cyan | magenta | amber | violet
   accent: green
+  # Default colour scheme: dark | light | auto (follow the visitor's OS)
+  color_scheme: dark
+  # Show the light/dark toggle in the sidebar (visitor choice is remembered)
+  theme_toggle: true
   # Rendered in the header as <prompt_user>@<prompt_host>:~$
   prompt_user: guest
   # prompt_host: my-site     # defaults to the slugified site title

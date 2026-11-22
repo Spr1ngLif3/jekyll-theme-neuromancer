@@ -1,5 +1,6 @@
+{%- assign color_scheme = site.neuromancer.color_scheme | default: "dark" -%}
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}" data-accent="{{ site.neuromancer.accent | default: 'green' }}"{% if site.neuromancer.scanlines %} data-scanlines{% endif %}>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}" data-accent="{{ site.neuromancer.accent | default: 'green' }}"{% if color_scheme != "auto" %} data-theme="{{ color_scheme }}"{% endif %}{% if site.neuromancer.scanlines %} data-scanlines{% endif %}>
   {%- include head.html -%}
   <body class="layout-{{ page.layout | default: 'default' }}">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -12,7 +13,7 @@
         {%- include footer.html -%}
       </div>
     </div>
-    <script src="{{ '/assets/js/neuromancer.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/neuromancer.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
     {%- include custom-footer.html -%}
   </body>
 </html>

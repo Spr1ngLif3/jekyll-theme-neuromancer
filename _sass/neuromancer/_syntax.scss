@@ -1,16 +1,4 @@
-// Rouge syntax highlighting — "neon" palette.
-
-:root {
-  --nm-syn-comment: #5c6680;
-  --nm-syn-keyword: #ff4f8b;
-  --nm-syn-string: #00ff9c;
-  --nm-syn-number: #ffb000;
-  --nm-syn-function: #00e5ff;
-  --nm-syn-type: #b98cff;
-  --nm-syn-variable: #eef3f9;
-  --nm-syn-operator: #8fa3c0;
-  --nm-syn-error: #ff2a6d;
-}
+// Rouge syntax highlighting — "neon" palette (colours in _variables.scss).
 
 .highlight {
   color: var(--nm-fg);

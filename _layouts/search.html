@@ -22,4 +22,4 @@ layout: default
     <p class="muted">Search requires JavaScript. Browse the <a href="{{ site.neuromancer.archive_url | default: '/blog/' | relative_url }}">archive</a> instead.</p>
   </noscript>
 </article>
-<script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/search.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

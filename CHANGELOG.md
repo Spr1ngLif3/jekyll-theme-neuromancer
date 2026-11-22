@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Light colour scheme using the same accent hues, tuned to pass WCAG AA.
+  `neuromancer.color_scheme` (`dark` | `light` | `auto`) sets the default.
+- Light/dark toggle at the bottom of the sidebar (`neuromancer.theme_toggle`).
+  The visitor's choice is saved in localStorage and applied before first paint.
+
 - `neuromancer.terminal` option to configure the home page shell session.
 
 ### Changed
@@ -20,6 +25,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `neuromancer.social` to avoid a duplicate.
 - `--nm-measure` now includes the content column's padding; new
   `--nm-sidebar` token sets the sidebar width.
+
+### Fixed
+
+- CSS and JS URLs carry a build-time version (`?v=`), so browsers fetch fresh
+  assets after every rebuild instead of mixing new pages with cached scripts.
+
+- Contrast of code comments, tag counts and the search placeholder now meets
+  WCAG AA in the dark scheme.
 
 ### Removed
 

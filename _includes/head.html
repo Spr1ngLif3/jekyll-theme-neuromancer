@@ -1,11 +1,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#07080c">
+  <meta name="color-scheme" content="{% if color_scheme == 'auto' %}dark light{% else %}{{ color_scheme }}{% endif %}">
+  <meta name="theme-color" content="{% if color_scheme == 'light' %}#f5f6f8{% else %}#07080c{% endif %}">
+  <script>
+    // Apply the visitor's saved theme before first paint (see theme toggle).
+    try {
+      var nmTheme = localStorage.getItem("nm-theme");
+      if (nmTheme === "light" || nmTheme === "dark") document.documentElement.setAttribute("data-theme", nmTheme);
+    } catch (e) {}
+  </script>
   {%- seo %}
   {%- feed_meta %}
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="icon" href="{{ site.neuromancer.favicon | default: '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
   {%- include custom-head.html %}
 </head>

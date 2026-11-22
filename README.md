@@ -15,7 +15,7 @@ It's built for personal sites and blogs on GitHub Pages.
 - Archive grouped by year, a tag index, and client-side search
 - RSS, sitemap and SEO tags through the official Jekyll plugins
 - Neon syntax highlighting with language labels and copy buttons
-- Five accent colours and an optional CRT scanline overlay
+- Dark and light schemes with a toggle, five accent colours, and an optional CRT scanline overlay
 - Accessible: skip link, visible focus, AA contrast, reduced-motion support, print styles
 - No web fonts, no trackers, no frameworks, and the JavaScript is optional
 - Works on classic GitHub Pages (Jekyll 3.10, libsass) and on Jekyll 4
@@ -80,6 +80,8 @@ author:
 
 neuromancer:
   accent: green           # green | cyan | magenta | amber | violet
+  color_scheme: dark      # dark | light | auto (follow the visitor's OS)
+  theme_toggle: true      # light/dark switch in the sidebar
   prompt_user: guest      # header shows <prompt_user>@<prompt_host>:~$
   prompt_host: my-site    # default: slugified site title
   scanlines: false        # CRT scanline overlay

@@ -1,5 +1,9 @@
 // Design tokens. Everything visual is driven by CSS custom properties so
 // sites can re-theme from _sass/neuromancer/_custom.scss without Sass.
+// Every text colour passes WCAG AA (4.5:1) against the backgrounds it is
+// used on, in both colour schemes.
+
+// Dark scheme (default) ----------------------------------------------------
 
 :root {
   color-scheme: dark;
@@ -16,6 +20,18 @@
   --nm-accent-soft: rgba(0, 255, 156, 0.12);
   --nm-accent-2: #ff2a6d;
   --nm-on-accent: #04060a;
+
+  --nm-scanline: rgba(255, 255, 255, 0.022);
+
+  --nm-syn-comment: #737d97;
+  --nm-syn-keyword: #ff4f8b;
+  --nm-syn-string: #00ff9c;
+  --nm-syn-number: #ffb000;
+  --nm-syn-function: #00e5ff;
+  --nm-syn-type: #b98cff;
+  --nm-syn-variable: #eef3f9;
+  --nm-syn-operator: #8fa3c0;
+  --nm-syn-error: #ff2a6d;
 
   --nm-font-mono: "JetBrains Mono", "Fira Code", "IBM Plex Mono", "Cascadia Code",
     ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -52,4 +68,73 @@
   --nm-accent: #b98cff;
   --nm-accent-soft: rgba(185, 140, 255, 0.14);
   --nm-accent-2: #00e5ff;
+}
+
+// Light scheme ---------------------------------------------------------------
+// Same hues as the dark scheme, darkened until they pass AA on light
+// backgrounds.
+
+@mixin nm-light-scheme {
+  color-scheme: light;
+
+  --nm-bg: #f5f6f8;
+  --nm-bg-alt: #eceef2;
+  --nm-bg-elev: #e1e5eb;
+  --nm-border: #cfd5de;
+  --nm-fg: #262b36;
+  --nm-fg-bright: #0a0c10;
+  --nm-muted: #596171;
+
+  --nm-accent: #00744a;
+  --nm-accent-soft: rgba(0, 116, 74, 0.12);
+  --nm-accent-2: #c2185b;
+  --nm-on-accent: #ffffff;
+
+  --nm-scanline: rgba(0, 0, 0, 0.035);
+
+  --nm-syn-comment: #5f6779;
+  --nm-syn-keyword: #c2185b;
+  --nm-syn-string: #00744a;
+  --nm-syn-number: #8a5a00;
+  --nm-syn-function: #006d85;
+  --nm-syn-type: #6b3fc4;
+  --nm-syn-variable: #0a0c10;
+  --nm-syn-operator: #4b5568;
+  --nm-syn-error: #c4002f;
+
+  &[data-accent="cyan"] {
+    --nm-accent: #006d85;
+    --nm-accent-soft: rgba(0, 109, 133, 0.12);
+    --nm-accent-2: #c2185b;
+  }
+
+  &[data-accent="magenta"] {
+    --nm-accent: #c2185b;
+    --nm-accent-soft: rgba(194, 24, 91, 0.1);
+    --nm-accent-2: #006d85;
+  }
+
+  &[data-accent="amber"] {
+    --nm-accent: #8a5a00;
+    --nm-accent-soft: rgba(138, 90, 0, 0.12);
+    --nm-accent-2: #c2185b;
+  }
+
+  &[data-accent="violet"] {
+    --nm-accent: #6b3fc4;
+    --nm-accent-soft: rgba(107, 63, 196, 0.12);
+    --nm-accent-2: #006d85;
+  }
+}
+
+// Chosen explicitly (config or toggle)...
+[data-theme="light"] {
+  @include nm-light-scheme;
+}
+
+// ...or following the OS when `neuromancer.color_scheme: auto`.
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    @include nm-light-scheme;
+  }
 }

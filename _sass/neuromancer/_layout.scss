@@ -12,6 +12,7 @@
 // Sidebar ----------------------------------------------------------------
 
 .site-header {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -20,6 +21,7 @@
 }
 
 .site-title {
+  margin-right: 9rem; // room for the theme toggle on small screens
   font-weight: 700;
   color: var(--nm-fg-bright);
   text-decoration: none;
@@ -62,6 +64,21 @@
   background: none;
 }
 
+.theme-toggle {
+  position: absolute;
+  top: 1.25rem;
+  right: var(--nm-gutter);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--nm-muted);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover { color: var(--nm-accent); }
+
 .site-nav a[aria-current="page"]::before {
   content: ">";
   position: absolute;
@@ -92,8 +109,16 @@
     gap: 0.4rem;
   }
 
-  // Push contact/feed links to the bottom of the sidebar.
+  // Push contact/feed links and the theme toggle to the bottom of the sidebar.
   .site-header .social-links { margin-top: auto; }
+
+  .site-title { margin-right: 0; }
+
+  .theme-toggle {
+    position: static;
+    align-self: flex-start;
+    margin-top: -1.5rem; // sit closer to the links above than the 2.5rem gap
+  }
 }
 
 // Content column -----------------------------------------------------------
