@@ -78,8 +78,6 @@ neuromancer:
   social:
     - name: github
       url: https://github.com/Spr1ngLif3
-    - name: rss
-      url: /feed.xml
 
   # Comments via giscus (https://giscus.app). Only rendered when
   # JEKYLL_ENV=production and `repo` is set.

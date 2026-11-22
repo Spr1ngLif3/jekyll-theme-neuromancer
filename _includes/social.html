@@ -1,7 +1,13 @@
-{%- if site.neuromancer.social %}
+{%- comment -%}
+  Links from site.neuromancer.social. Pass rss=true to append the feed link.
+{%- endcomment -%}
+{%- if site.neuromancer.social or include.rss %}
 <ul class="social-links" aria-label="Elsewhere">
   {%- for link in site.neuromancer.social %}
   <li><a href="{{ link.url }}" rel="me noopener"{% if link.title %} title="{{ link.title | escape }}"{% endif %}>{{ link.name | escape }}</a></li>
   {%- endfor %}
+  {%- if include.rss %}
+  <li><a href="{{ site.feed.path | default: 'feed.xml' | relative_url }}">rss</a></li>
+  {%- endif %}
 </ul>
 {%- endif %}

@@ -20,6 +20,9 @@
 
   [data-scanlines] body::after { display: none; }
 
+  .site { display: block; }
+  .site-content { padding: 0; }
+
   .prose a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
