@@ -1,31 +1,24 @@
 /*!
  * Neuromancer theme — client-side search.
- * Loads /assets/search.json once and filters it in the browser.
- * Results are rendered with DOM APIs (no innerHTML) so post content can
- * never inject markup.
+ * - header box: live results in a dropdown, "/" focuses it
+ * - results page: full list, synced with ?q= in the URL
+ * The index (/assets/search.json) is fetched once, on first use. Results are
+ * rendered with DOM APIs (no innerHTML) so post content can never inject markup.
  */
 (function () {
   "use strict";
 
-  var form = document.querySelector("form[data-search-index]");
-  if (!form) return;
+  var indexRequest = null;
 
-  var input = form.querySelector("input[type=search]");
-  var results = document.getElementById("search-results");
-  var status = document.getElementById("search-status");
-  var index = null;
-  var debounce;
-
-  function setStatus(text) { status.textContent = text; }
-
-  function load() {
-    if (index) return Promise.resolve(index);
-    return fetch(form.getAttribute("data-search-index"), { credentials: "same-origin" })
-      .then(function (res) {
+  function loadIndex(url) {
+    if (!indexRequest) {
+      indexRequest = fetch(url, { credentials: "same-origin" }).then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
-      })
-      .then(function (data) { index = data; return data; });
+      });
+      indexRequest.catch(function () { indexRequest = null; }); // allow a retry
+    }
+    return indexRequest;
   }
 
   function score(entry, terms) {
@@ -44,75 +37,157 @@
     return total;
   }
 
-  function render(matches) {
-    results.textContent = "";
-    matches.forEach(function (entry) {
-      var li = document.createElement("li");
-      li.className = "post-list-item";
-
-      var time = document.createElement("time");
-      time.className = "post-list-date";
-      time.dateTime = entry.date;
-      time.textContent = entry.date;
-
-      var body = document.createElement("div");
-      body.className = "post-list-body";
-      var link = document.createElement("a");
-      link.className = "post-list-title";
-      link.href = entry.url;
-      link.textContent = entry.title;
-      body.appendChild(link);
-
-      li.appendChild(time);
-      li.appendChild(body);
-      results.appendChild(li);
-    });
-  }
-
-  function search(query) {
+  // Resolves to the entries matching every term, best first.
+  function search(url, query) {
     var terms = query.toLowerCase().split(/\s+/).filter(Boolean);
-    if (!terms.length) {
-      results.textContent = "";
-      setStatus("");
-      return;
-    }
-    load().then(function (data) {
-      var matches = data
+    return loadIndex(url).then(function (data) {
+      return data
         .map(function (entry) { return { entry: entry, score: score(entry, terms) }; })
         .filter(function (m) { return m.score > 0; })
         .sort(function (a, b) { return b.score - a.score; })
         .map(function (m) { return m.entry; });
-      render(matches);
-      setStatus(matches.length + (matches.length === 1 ? " match" : " matches") + " for \"" + query + "\"");
-    }).catch(function () {
-      setStatus("error: could not load the search index.");
     });
   }
 
-  function syncUrl(query) {
-    if (!window.history || !window.history.replaceState) return;
-    var url = new URL(window.location.href);
-    if (query) { url.searchParams.set("q", query); } else { url.searchParams.delete("q"); }
-    window.history.replaceState(null, "", url);
+  function summary(count, query) {
+    return count + (count === 1 ? " match" : " matches") + " for \"" + query + "\"";
   }
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    search(input.value.trim());
-  });
+  function link(entry, className) {
+    var a = document.createElement("a");
+    a.className = className;
+    a.href = entry.url;
+    a.textContent = entry.title;
+    return a;
+  }
 
-  input.addEventListener("input", function () {
-    clearTimeout(debounce);
-    debounce = setTimeout(function () {
+  // Header box -----------------------------------------------------------------
+
+  function setupBox(form) {
+    var url = form.getAttribute("data-search-index");
+    var input = form.querySelector("input");
+    var panel = form.querySelector(".site-search-results");
+    var status = panel.querySelector(".site-search-status");
+    var list = panel.querySelector("ul");
+    var LIMIT = 8;
+    var latest = 0;
+    var debounce;
+
+    function update() {
       var query = input.value.trim();
-      syncUrl(query);
-      search(query);
-    }, 150);
-  });
+      var request = ++latest;
+      if (!query) { panel.hidden = true; return; }
+      search(url, query).then(function (matches) {
+        if (request !== latest) return; // a newer query is in flight
+        list.textContent = "";
+        matches.slice(0, LIMIT).forEach(function (entry) {
+          var li = document.createElement("li");
+          li.appendChild(link(entry, "site-search-link"));
+          list.appendChild(li);
+        });
+        panel.hidden = false;
+        status.textContent = summary(matches.length, query);
+      }, function () {
+        list.textContent = "";
+        panel.hidden = false;
+        status.textContent = "error: could not load the search index.";
+      });
+    }
 
-  var initial = new URLSearchParams(window.location.search).get("q");
-  if (initial) {
-    input.value = initial;
-    search(initial.trim());
+    input.addEventListener("input", function () {
+      clearTimeout(debounce);
+      debounce = setTimeout(update, 120);
+    });
+    input.addEventListener("focus", function () {
+      loadIndex(url).catch(function () {}); // warm up; errors surface on search
+      if (input.value.trim()) update();
+    });
+    // Keep focus in the input when a result is clicked or tapped.
+    panel.addEventListener("mousedown", function (event) { event.preventDefault(); });
+    form.addEventListener("focusout", function (event) {
+      if (!form.contains(event.relatedTarget)) panel.hidden = true;
+    });
+    form.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { panel.hidden = true; input.blur(); }
+    });
+    document.addEventListener("keydown", function (event) {
+      var target = event.target;
+      if (event.key !== "/" || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return;
+      event.preventDefault();
+      input.focus();
+    });
   }
+
+  // Results page ----------------------------------------------------------------
+
+  function setupPage(form) {
+    var url = form.getAttribute("data-search-index");
+    var input = form.querySelector("input");
+    var results = document.getElementById("search-results");
+    var status = document.getElementById("search-status");
+    var debounce;
+
+    function render(matches) {
+      results.textContent = "";
+      matches.forEach(function (entry) {
+        var li = document.createElement("li");
+        var time = document.createElement("time");
+        var body = document.createElement("div");
+        li.className = "post-list-item";
+        time.className = "post-list-date";
+        time.dateTime = entry.date;
+        time.textContent = entry.date;
+        body.className = "post-list-body";
+        body.appendChild(link(entry, "post-list-title"));
+        li.appendChild(time);
+        li.appendChild(body);
+        results.appendChild(li);
+      });
+    }
+
+    function run(query) {
+      if (!query) {
+        results.textContent = "";
+        status.textContent = "";
+        return;
+      }
+      search(url, query).then(function (matches) {
+        render(matches);
+        status.textContent = summary(matches.length, query);
+      }, function () {
+        status.textContent = "error: could not load the search index.";
+      });
+    }
+
+    function syncUrl(query) {
+      var next = new URL(window.location.href);
+      if (query) { next.searchParams.set("q", query); } else { next.searchParams.delete("q"); }
+      window.history.replaceState(null, "", next);
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      run(input.value.trim());
+    });
+
+    input.addEventListener("input", function () {
+      clearTimeout(debounce);
+      debounce = setTimeout(function () {
+        var query = input.value.trim();
+        syncUrl(query);
+        run(query);
+      }, 150);
+    });
+
+    var initial = new URLSearchParams(window.location.search).get("q");
+    if (initial) {
+      input.value = initial;
+      run(initial.trim());
+    }
+  }
+
+  var box = document.querySelector("form.site-search");
+  if (box) setupBox(box);
+  document.querySelectorAll("form[data-search-page]").forEach(setupPage);
 })();

@@ -10,14 +10,14 @@ and it tries to stay out of the way of your writing.
 
 ## features
 
-- blog posts with reading time, tags and previous/next navigation
+- blog posts with tags and previous/next navigation
 - a year-grouped [archive]({{ '/blog/' | relative_url }}) and a [tag index]({{ '/tags/' | relative_url }})
 - client-side [search]({{ '/search/' | relative_url }}) with no external services
 - RSS feed, sitemap and SEO tags via the official Jekyll plugins
 - syntax highlighting with a neon palette and copy-to-clipboard buttons
 - five accent colours and an optional CRT scanline overlay
 - accessible: skip link, visible focus, reduced-motion support, AA contrast
-- no web fonts, no trackers, a few KB of optional JavaScript
+- self-hosted fonts, no trackers, a few KB of optional JavaScript
 
 ## getting started
 

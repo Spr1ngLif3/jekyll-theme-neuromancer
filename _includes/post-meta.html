@@ -1,27 +1,9 @@
 {%- comment -%}
-  Post metadata line: date, last update, reading time, author.
+  Post metadata line (publication date).
   Params:
-    post    (required) the post object
-    content (optional) rendered content, used for reading time
+    post (required) the post object
 {%- endcomment -%}
 {%- assign date_format = site.neuromancer.date_format | default: "%Y-%m-%d" -%}
-{%- assign author = include.post.author | default: site.author.name -%}
-{%- if author.name %}{% assign author = author.name %}{% endif -%}
 <p class="post-meta">
   <time class="dt-published" datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: date_format }}</time>
-  {%- if include.post.last_modified_at %}
-  <span class="sep" aria-hidden="true">//</span>
-  <span>updated <time class="dt-updated" datetime="{{ include.post.last_modified_at | date_to_xmlschema }}">{{ include.post.last_modified_at | date: date_format }}</time></span>
-  {%- endif %}
-  {%- if include.content and site.neuromancer.reading_time != false %}
-  {%- assign words = include.content | strip_html | number_of_words %}
-  {%- assign wpm = site.neuromancer.words_per_minute | default: 200 %}
-  {%- assign minutes = words | divided_by: wpm | at_least: 1 %}
-  <span class="sep" aria-hidden="true">//</span>
-  <span>{{ minutes }} min read</span>
-  {%- endif %}
-  {%- if author %}
-  <span class="sep" aria-hidden="true">//</span>
-  <span class="p-author">{{ author | escape }}</span>
-  {%- endif %}
 </p>

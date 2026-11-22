@@ -1,18 +1,17 @@
-// Page shell: a stacked header on small screens, a sticky left sidebar
-// next to the content column on wider ones.
+// Page shell
+// - small screens: header, search bar and content stacked
+// - 64rem+: three columns, sidebar | content | search rail; both side
+//   columns are sticky and full height
 
 .site {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: calc(var(--nm-sidebar) + var(--nm-measure));
-  margin: 0 auto;
 }
 
 // Sidebar ----------------------------------------------------------------
 
 .site-header {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -21,8 +20,7 @@
 }
 
 .site-title {
-  margin-right: 7rem; // room for the theme toggle on small screens
-  font-weight: 700;
+  font-weight: 600;
   color: var(--nm-fg-bright);
   overflow-wrap: anywhere;
 }
@@ -53,7 +51,8 @@
   list-style: none;
 }
 
-.site-header .social-links { font-size: 0.85rem; }
+.site-nav { font-size: 0.925rem; }
+.site-header .social-links { font-size: 0.8rem; }
 
 .site-nav a,
 .site-header .social-links a {
@@ -69,16 +68,28 @@
   background: none;
 }
 
-.theme-toggle {
+.site-nav a[aria-current="page"]::before {
+  content: ">";
   position: absolute;
-  top: 1.25rem;
-  right: var(--nm-gutter);
+  left: -1.25ch;
+}
+
+// Feed links + theme toggle: one row on small screens, bottom of the sidebar
+// on wide ones.
+.site-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.25rem;
+}
+
+.theme-toggle {
   padding: 0;
   border: 0;
   background: none;
   color: var(--nm-muted);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   cursor: pointer;
 }
 
@@ -88,26 +99,60 @@
 .theme-toggle[data-current="light"] .theme-light,
 .theme-toggle[data-current="dark"] .theme-dark { color: var(--nm-accent); }
 
-.site-nav a[aria-current="page"]::before {
-  content: ">";
-  position: absolute;
-  left: -1.25ch;
+// Search rail -----------------------------------------------------------------
+
+.site-rail {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.25rem var(--nm-gutter) 0;
 }
 
-@media (min-width: 52rem) {
+// Content area ---------------------------------------------------------------
+// Main and footer share one column up to --nm-content wide, starting right
+// after the sidebar; any spare width stays on the right.
+
+.site-content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0 var(--nm-gutter);
+}
+
+.site-main,
+.site-footer {
+  width: 100%;
+  max-width: var(--nm-content);
+}
+
+.site-main {
+  flex: 1 0 auto;
+  padding: 1.75rem 0 3.5rem;
+}
+
+.site-main:focus { outline: none; }
+
+// Wide screens ---------------------------------------------------------------
+
+@media (min-width: 64rem) {
   .site {
     display: grid;
-    grid-template-columns: var(--nm-sidebar) minmax(0, 1fr);
+    grid-template-columns: var(--nm-sidebar) minmax(0, 1fr) var(--nm-rail);
+  }
+
+  .site-header,
+  .site-rail {
+    position: sticky;
+    top: 0;
+    grid-row: 1;
+    align-self: start;
+    height: 100vh;
   }
 
   .site-header {
-    position: sticky;
-    top: 0;
-    align-self: start;
-    height: 100vh;
     overflow-y: auto;
     gap: 2.5rem;
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.5rem;
     border-bottom: 0;
     border-right: 1px solid var(--nm-border);
   }
@@ -118,46 +163,97 @@
     gap: 0.4rem;
   }
 
-  // Push contact/feed links and the theme toggle to the bottom of the sidebar.
-  .site-header .social-links { margin-top: auto; }
-
-  .site-title { margin-right: 0; }
-
   .site-avatar {
     align-self: center;
     width: var(--nm-avatar-size);
   }
 
-  .theme-toggle {
-    position: static;
-    align-self: flex-start;
-    margin-top: -1.5rem; // sit closer to the links above than the 2.5rem gap
+  .site-header-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: auto;
   }
-}
 
-// Content column -----------------------------------------------------------
+  .site-rail {
+    grid-column: 3;
+    display: block;
+    padding: 2rem 1rem 2rem 0;
+  }
 
-.site-content {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 0 var(--nm-gutter);
-}
-
-@media (min-width: 52rem) {
   .site-content {
+    grid-column: 2;
+    grid-row: 1;
     min-height: 100vh;
-    padding-left: 3.5rem;
+    padding: 0 1.5rem 0 2.5rem;
   }
+
+  .site-main { padding-top: 2rem; }
 }
 
-.site-main {
-  flex: 1 0 auto;
-  padding: 2.5rem 0 4rem;
+// Search box ------------------------------------------------------------------
+// Fixed size. Live results drop down while typing.
+
+.site-search {
+  position: relative;
+  width: 100%;
+  font-size: 0.8rem;
 }
 
-.site-main:focus { outline: none; }
+
+.site-search input {
+  display: block;
+  width: 100%;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--nm-border);
+  border-radius: var(--nm-radius);
+  background: var(--nm-bg-alt);
+  color: var(--nm-fg-bright);
+  font: inherit;
+  caret-color: var(--nm-accent);
+  transition: border-color 0.15s;
+}
+
+.site-search input::placeholder { color: var(--nm-muted); opacity: 1; }
+
+.site-search input:hover,
+.site-search input:focus { border-color: var(--nm-accent); }
+
+.site-search-results {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  left: 0;
+  z-index: 50;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+  border: 1px solid var(--nm-border);
+  border-radius: var(--nm-radius);
+  background: var(--nm-bg-elev);
+}
+
+.site-search-status {
+  margin: 0;
+  padding: 0 0.8rem 0.35rem;
+  color: var(--nm-muted);
+  font-size: 0.7rem;
+}
+
+.site-search-results ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-search-link {
+  display: block;
+  padding: 0.35rem 0.8rem;
+  color: var(--nm-fg-bright);
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
 
 // Footer -----------------------------------------------------------------
 
@@ -165,7 +261,7 @@
   padding: 1.5rem 0 2rem;
   border-top: 1px solid var(--nm-border);
   color: var(--nm-muted);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 
 .site-footer a { color: var(--nm-muted); }
@@ -181,7 +277,7 @@
 .eof {
   margin: 1rem 0 0;
   color: var(--nm-border);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 }
 
 .sep { color: var(--nm-border); }

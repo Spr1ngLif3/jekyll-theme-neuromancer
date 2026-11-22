@@ -27,10 +27,12 @@
       {%- endfor %}
     </ul>
   </nav>
-  {%- include social.html rss=true %}
-  {%- unless site.neuromancer.theme_toggle == false %}
-  <button class="theme-toggle" type="button" hidden>
-    <span class="theme-light">light</span> / <span class="theme-dark">dark</span>
-  </button>
-  {%- endunless %}
+  <div class="site-header-meta">
+    {%- include social.html rss=true %}
+    {%- unless site.neuromancer.theme_toggle == false %}
+    <button class="theme-toggle" type="button" hidden>
+      <span class="theme-light">light</span> / <span class="theme-dark">dark</span>
+    </button>
+    {%- endunless %}
+  </div>
 </header>

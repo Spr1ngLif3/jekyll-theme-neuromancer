@@ -1,0 +1,11 @@
+{%- comment -%}
+  Search box (right rail on wide screens). Live results appear below it;
+  Enter (or no JavaScript) opens the full results page.
+{%- endcomment -%}
+<form class="site-search" role="search" action="{{ site.neuromancer.search_url | default: '/search/' | relative_url }}" data-search-index="{{ '/assets/search.json' | relative_url }}">
+  <input type="search" name="q" placeholder="search" aria-label="Search posts" autocomplete="off" spellcheck="false">
+  <div class="site-search-results" hidden>
+    <p class="site-search-status" role="status"></p>
+    <ul></ul>
+  </div>
+</form>

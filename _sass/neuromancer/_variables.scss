@@ -12,7 +12,7 @@
   --nm-bg-alt: #0d0f16;
   --nm-bg-elev: #141824;
   --nm-border: #1e2433;
-  --nm-fg: #c5cfdc;
+  --nm-fg: #b6c1d0;
   --nm-fg-bright: #eef3f9;
   --nm-muted: #7f89a0;
 
@@ -33,15 +33,17 @@
   --nm-syn-operator: #8fa3c0;
   --nm-syn-error: #ff2a6d;
 
-  --nm-font-mono: "JetBrains Mono", "Fira Code", "IBM Plex Mono", "Cascadia Code",
+  --nm-font-mono: "IBM Plex Mono", "JetBrains Mono", "Fira Code", "Cascadia Code",
     ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --nm-font-body: var(--nm-font-mono);
 
-  --nm-font-size: 15px;
+  --nm-font-size: 16px;
   --nm-line-height: 1.75;
-  --nm-sidebar: 17rem;
+  --nm-sidebar: 16rem;
+  --nm-rail: 14rem;    // right search column on wide screens
   --nm-avatar-size: 8rem;
-  --nm-measure: 48rem;
+  --nm-content: 90rem; // max width of the content area
+  --nm-measure: 72ch;  // max line length of reading text
   --nm-gutter: 1.25rem;
   --nm-radius: 2px;
 }
@@ -82,7 +84,7 @@
   --nm-bg-alt: #eceef2;
   --nm-bg-elev: #e1e5eb;
   --nm-border: #cfd5de;
-  --nm-fg: #262b36;
+  --nm-fg: #343b48;
   --nm-fg-bright: #0a0c10;
   --nm-muted: #596171;
 

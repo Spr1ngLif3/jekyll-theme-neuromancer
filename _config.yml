@@ -55,10 +55,11 @@ neuromancer:
   # Number of posts on the home page (0 hides the list)
   home_posts: 5
   show_excerpts: true
-  reading_time: true
-  words_per_minute: 200
   archive_url: /blog/
   tags_url: /tags/
+  # Search box in the top-right corner; Enter opens search_url
+  search: true
+  search_url: /search/
   # Show "powered by jekyll + neuromancer" in the footer
   credit: true
 
@@ -78,8 +79,6 @@ neuromancer:
       url: /blog/
     - title: tags
       url: /tags/
-    - title: search
-      url: /search/
     - title: about
       url: /about/
 

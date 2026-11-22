@@ -15,7 +15,7 @@ a reference when writing.
 
 ## text
 
-Paragraphs are set in a monospace face. You can use **bold**, *italic*,
+Everything is set in IBM Plex Mono; hierarchy comes from size, weight and colour. You can use **bold**, *italic*,
 ~~strikethrough~~, `inline code`, <kbd>Ctrl</kbd> + <kbd>C</kbd>,
 <mark>highlighted text</mark> and [links](https://jekyllrb.com).
 Abbreviations like <abbr title="Intrusion Countermeasures Electronics">ICE</abbr>

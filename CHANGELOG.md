@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Self-hosted IBM Plex Mono (SIL OFL) as the single typeface, for the same
+  look on every device.
+- Clearer type hierarchy: larger scale (16px base), body text one step dimmer
+  than headings, and a smaller, quieter interface layer (nav, metadata,
+  footer).
+- Section headings (home post list, archive years, tag groups, comments)
+  are plain headings instead of small `//` labels; the home one ("recent
+  works" by default, was "recent transmissions") uses the accent colour.
+- Home terminal block: commands are shown without the `$` prompt, in the
+  accent colour, and the first output is shown as a large headline.
+- Page and post titles, and headings inside pages and posts, no longer show
+  `#` / `##` / `###` markers.
+- Tags are shown without a `#` prefix (chips and tag page headings).
+- Page titles (about, works, tags, search, 404) use the accent colour; post
+  titles keep the heading colour.
+- The archive page is titled "works" by default.
+- Post metadata shows only the date; the home page post list shows titles
+  and excerpts without dates.
+
+- Wider layout: the sidebar is pinned to the left edge and the content area
+  uses the remaining width (up to `--nm-content`, 90rem). Reading text is
+  capped at `--nm-measure` (now a line length, 72ch); code blocks, tables
+  and figures may use the full width. The home post list uses columns when
+  there is room.
+- Search moved from a nav page to a box on every page: in a narrow right
+  column (`--nm-rail`) mirroring the sidebar on screens from 64rem, and as a
+  full-width bar under the header on smaller ones. It shows live results, opens the full results
+  page on Enter and is focused with `/`. New options: `neuromancer.search`,
+  `neuromancer.search_url`.
+- The header cursor no longer blinks.
+- On small screens the theme toggle sits next to the feed links.
+
+### Removed
+
+- `grep -i` label on the search page.
+- Reading time and author in post metadata (`neuromancer.reading_time`,
+  `neuromancer.words_per_minute`).
+
 ## [0.2.0] - 2026-11-22
 
 ### Added

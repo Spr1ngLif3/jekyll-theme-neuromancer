@@ -21,7 +21,7 @@ layout: default
 
   {%- for tag in tags %}
   <section class="tag-group" id="{{ tag[0] | slugify }}" aria-labelledby="tag-{{ tag[0] | slugify }}">
-    <h2 id="tag-{{ tag[0] | slugify }}" class="section-title">#{{ tag[0] | escape }}</h2>
+    <h2 id="tag-{{ tag[0] | slugify }}" class="section-title">{{ tag[0] | escape }}</h2>
     {%- assign tag_posts = tag[1] %}
     {%- include post-list.html posts=tag_posts %}
   </section>

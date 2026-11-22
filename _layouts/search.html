@@ -11,9 +11,8 @@ layout: default
   <div class="prose">{{ content }}</div>
   {%- endif %}
 
-  <form class="search-form" role="search" action="{{ page.url | relative_url }}" data-search-index="{{ '/assets/search.json' | relative_url }}">
-    <label for="search-input"><span class="ps1">grep -i</span></label>
-    <input id="search-input" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="pattern..." aria-describedby="search-status">
+  <form class="search-form" role="search" action="{{ page.url | relative_url }}" data-search-page data-search-index="{{ '/assets/search.json' | relative_url }}">
+    <input id="search-input" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="search posts" aria-label="Search posts" aria-describedby="search-status">
   </form>
   <p id="search-status" class="muted" role="status" aria-live="polite"></p>
   <ul id="search-results" class="post-list"></ul>
@@ -22,4 +21,3 @@ layout: default
     <p class="muted">Search requires JavaScript. Browse the <a href="{{ site.neuromancer.archive_url | default: '/blog/' | relative_url }}">archive</a> instead.</p>
   </noscript>
 </article>
-<script src="{{ '/assets/js/search.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

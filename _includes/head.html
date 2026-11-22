@@ -12,6 +12,8 @@
   </script>
   {%- seo %}
   {%- feed_meta %}
+  <link rel="preload" href="{{ '/assets/fonts/ibm-plex-mono-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/ibm-plex-mono-600.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="icon" href="{{ site.neuromancer.favicon | default: '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
   {%- include custom-head.html %}
