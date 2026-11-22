@@ -42,6 +42,10 @@ neuromancer:
   color_scheme: dark
   # Show the light/dark toggle in the sidebar (visitor choice is remembered)
   theme_toggle: true
+  # Square image in the sidebar, between the title and the navigation
+  # (path in your site or full URL; non-square images are cropped).
+  # avatar: /assets/images/avatar.png
+  # avatar_alt: Portrait of anon        # defaults to author.name
   # Rendered in the header as <prompt_user>@<prompt_host>:~$
   prompt_user: guest
   # prompt_host: my-site     # defaults to the slugified site title

@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   scheme (`neuromancer.theme_toggle`).
   The visitor's choice is saved in localStorage and applied before first paint.
 
+- Optional square sidebar image between the title and the navigation
+  (`neuromancer.avatar`, `neuromancer.avatar_alt`, `--nm-avatar-size`).
 - `neuromancer.terminal` option to configure the home page shell session.
 
 ### Changed

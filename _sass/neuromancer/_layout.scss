@@ -32,6 +32,17 @@
 .prompt-path { color: var(--nm-muted); }
 .prompt-host { color: var(--nm-fg-bright); }
 
+// Optional square image (`neuromancer.avatar`); any aspect ratio is cropped.
+.site-avatar {
+  display: block;
+  width: 4rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--nm-border);
+  border-radius: var(--nm-radius);
+}
+
 .site-nav ul,
 .site-header .social-links {
   display: flex;
@@ -111,6 +122,11 @@
   .site-header .social-links { margin-top: auto; }
 
   .site-title { margin-right: 0; }
+
+  .site-avatar {
+    align-self: center;
+    width: var(--nm-avatar-size);
+  }
 
   .theme-toggle {
     position: static;

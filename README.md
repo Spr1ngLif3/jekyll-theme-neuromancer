@@ -84,6 +84,8 @@ neuromancer:
   theme_toggle: true      # light/dark switch in the sidebar
   prompt_user: guest      # header shows <prompt_user>@<prompt_host>:~$
   prompt_host: my-site    # default: slugified site title
+  avatar: /assets/images/avatar.png   # square image above the nav (cropped to square)
+  avatar_alt: Portrait of me          # default: author.name
   scanlines: false        # CRT scanline overlay
   date_format: "%Y-%m-%d"
   home_posts: 5           # posts listed on the home page (0 hides the list)
@@ -171,6 +173,7 @@ block.
     --nm-accent-soft: rgba(57, 255, 20, 0.12);
     --nm-font-body: system-ui, sans-serif;  // sans-serif body, mono UI
     --nm-measure: 52rem;                     // wider content column
+    --nm-avatar-size: 10rem;                 // bigger sidebar image
   }
   ```
 
