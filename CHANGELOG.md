@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Article text (pages and posts) uses the full width of the content area,
+  the same as code blocks. `--nm-measure` now only caps home page excerpts.
+
 ## [0.3.0] - 2026-11-23
 
 ### Added

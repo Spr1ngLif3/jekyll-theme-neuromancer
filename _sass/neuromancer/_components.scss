@@ -1,10 +1,7 @@
 // Page & post headers ----------------------------------------------------
 
 .page-header,
-.post-header {
-  max-width: var(--nm-measure);
-  margin-bottom: 2.5rem;
-}
+.post-header { margin-bottom: 2.5rem; }
 
 .page-title,
 .post-title {
@@ -39,15 +36,6 @@
 // Prose ----------------------------------------------------------------
 
 .prose > :first-child { margin-top: 0; }
-
-// Reading text keeps a comfortable line length; code, tables and figures
-// may use the full width of the content area.
-.prose > * { max-width: var(--nm-measure); }
-
-.prose > .highlighter-rouge,
-.prose > figure,
-.prose > pre,
-.prose > table { max-width: none; }
 
 .prose h4 { color: var(--nm-muted); }
 
@@ -356,9 +344,6 @@ figure.highlight:hover .copy-button,
 .tag-group { scroll-margin-top: 1rem; }
 
 // Post footer ------------------------------------------------------------
-
-.post-footer,
-.comments { max-width: var(--nm-measure); }
 
 .post-footer {
   margin-top: 3.5rem;
