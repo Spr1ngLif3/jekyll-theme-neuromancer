@@ -1,9 +1,9 @@
 {%- assign prompt_user = site.neuromancer.prompt_user | default: "guest" -%}
 {%- assign prompt_host = site.neuromancer.prompt_host | default: site.title | slugify -%}
 <header class="site-header">
-  <div class="site-title">
+  <a class="site-title" href="{{ '/' | relative_url }}" rel="home" aria-label="{{ site.title | escape }}, home">
     <span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>
-  </div>
+  </a>
   {%- assign avatar = site.neuromancer.avatar %}
   {%- if avatar %}
   {%- unless avatar contains "://" %}{% assign avatar = avatar | relative_url %}{% endunless %}

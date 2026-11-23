@@ -19,9 +19,14 @@
   border-bottom: 1px solid var(--nm-border);
 }
 
-.site-title {
-  font-weight: 600;
+// Links home; keeps its look (no underline or highlight), the glitch on
+// hover/focus is the cue.
+.site-title,
+.site-title:hover {
+  background: none;
   color: var(--nm-fg-bright);
+  font-weight: 600;
+  text-decoration: none;
   overflow-wrap: anywhere;
 }
 

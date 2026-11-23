@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The site title prompt links to the home page again (alongside the `home`
+  nav item).
 - The presentation block (`whoami` / `cat motd`) moved from the home page
   into the sidebar, between the title and the navigation, on every page,
   with a darker, more discreet background (`--nm-bg-panel`).
