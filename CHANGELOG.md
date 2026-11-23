@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Home page lists posts in a single column at every screen size.
+- Home excerpts come from the post's paragraphs (headings, lists and code
+  are skipped), cut to `neuromancer.excerpt_words` (35) and capped at the
+  reading width; the `description` is used only when a post has no
+  paragraphs.
+
 - Self-hosted IBM Plex Mono (SIL OFL) as the single typeface, for the same
   look on every device.
 - Clearer type hierarchy: larger scale (16px base), body text one step dimmer
@@ -31,8 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Wider layout: the sidebar is pinned to the left edge and the content area
   uses the remaining width (up to `--nm-content`, 90rem). Reading text is
   capped at `--nm-measure` (now a line length, 72ch); code blocks, tables
-  and figures may use the full width. The home post list uses columns when
-  there is room.
+  and figures may use the full width.
 - Search moved from a nav page to a box on every page: in a narrow right
   column (`--nm-rail`) mirroring the sidebar on screens from 64rem, and as a
   full-width bar under the header on smaller ones. It shows live results, opens the full results

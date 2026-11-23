@@ -28,7 +28,7 @@ layout: default
 {%- if site.posts.size > 0 and home_posts > 0 %}
 <section class="home-posts" aria-labelledby="recent-posts">
   <h2 id="recent-posts" class="section-title home-posts-title">{{ page.posts_title | default: "recent works" | escape }}</h2>
-  {%- include post-list.html posts=site.posts limit=home_posts excerpts=true dates=false grid=true %}
+  {%- include post-list.html posts=site.posts limit=home_posts excerpts=true dates=false %}
   {%- if site.posts.size > home_posts %}
   <p class="more-link"><a href="{{ site.neuromancer.archive_url | default: '/blog/' | relative_url }}">cd ./archive</a></p>
   {%- endif %}

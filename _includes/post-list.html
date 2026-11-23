@@ -5,11 +5,10 @@
     limit    (optional) max number of posts to show
     excerpts (optional) show post excerpts when true
     dates    (optional) set to false to hide dates
-    grid     (optional) lay posts out in columns when there is room
 {%- endcomment -%}
 {%- assign date_format = site.neuromancer.date_format | default: "%Y-%m-%d" -%}
 {%- assign limit = include.limit | default: include.posts.size -%}
-<ul class="post-list{% if include.dates == false %} post-list--no-dates{% endif %}{% if include.grid %} post-list--grid{% endif %}">
+<ul class="post-list{% if include.dates == false %} post-list--no-dates{% endif %}">
   {%- for post in include.posts limit: limit %}
   <li class="post-list-item">
     {%- unless include.dates == false %}
@@ -18,7 +17,8 @@
     <div class="post-list-body">
       <a class="post-list-title" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
       {%- if include.excerpts and site.neuromancer.show_excerpts != false %}
-      {%- assign excerpt = post.description | default: post.excerpt | strip_html | strip | truncatewords: 30 %}
+      {%- capture excerpt %}{% include post-excerpt.html post=post %}{% endcapture %}
+      {%- assign excerpt = excerpt | strip %}
       {%- if excerpt != "" %}
       <p class="post-list-excerpt">{{ excerpt }}</p>
       {%- endif %}

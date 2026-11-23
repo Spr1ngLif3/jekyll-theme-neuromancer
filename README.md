@@ -91,6 +91,7 @@ neuromancer:
   date_format: "%Y-%m-%d"
   home_posts: 5           # posts listed on the home page (0 hides the list)
   show_excerpts: true     # excerpts in the home page list
+  excerpt_words: 35       # words of post body in each excerpt
   archive_url: /blog/
   tags_url: /tags/
   search: true            # search box in the top-right corner ("/" focuses it)
@@ -151,7 +152,7 @@ defaults:
 | key                | where       | effect                                         |
 |--------------------|-------------|------------------------------------------------|
 | `title`            | all         | page/post title                                |
-| `description`      | posts       | used for SEO and as the excerpt in lists       |
+| `description`      | posts       | SEO summary; excerpt fallback for posts without paragraphs |
 | `tags`             | posts       | listed under the post and on the tag index     |
 | `last_modified_at` | posts       | modification date for SEO metadata             |
 | `author`           | posts       | overrides `site.author.name`                   |

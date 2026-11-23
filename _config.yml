@@ -55,6 +55,8 @@ neuromancer:
   # Number of posts on the home page (0 hides the list)
   home_posts: 5
   show_excerpts: true
+  # Words of post body shown in the home page list
+  excerpt_words: 35
   archive_url: /blog/
   tags_url: /tags/
   # Search box in the top-right corner; Enter opens search_url

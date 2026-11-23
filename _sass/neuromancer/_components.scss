@@ -279,19 +279,6 @@ figure.highlight:hover .copy-button,
 
 .post-list--no-dates .post-list-item { grid-template-columns: 1fr; }
 
-// Two (or more) columns of posts when there is room, e.g. on the home page.
-.post-list--grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
-  column-gap: 2.5rem;
-}
-
-.post-list--grid .post-list-item,
-.post-list--grid .post-list-item:last-child {
-  border-top: 1px dashed var(--nm-border);
-  border-bottom: 0;
-}
-
 .post-list-date {
   padding-top: 0.3rem;
   color: var(--nm-muted);
@@ -310,6 +297,7 @@ figure.highlight:hover .copy-button,
 .post-list-title:hover { color: var(--nm-on-accent); }
 
 .post-list-excerpt {
+  max-width: var(--nm-measure);
   margin: 0.3rem 0 0;
   color: var(--nm-muted);
   font-size: 0.925rem;

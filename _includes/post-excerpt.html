@@ -1,0 +1,17 @@
+{%- comment -%}
+  Plain-text preview of a post: the text of its paragraphs (headings,
+  lists and code blocks are skipped), cut to site.neuromancer.excerpt_words
+  (35). Falls back to the post's `description` when there are no paragraphs.
+  Params:
+    post (required) the post object
+{%- endcomment -%}
+{%- assign words = site.neuromancer.excerpt_words | default: 35 -%}
+{%- assign prose = "" -%}
+{%- assign chunks = include.post.content | split: "<p>" -%}
+{%- for chunk in chunks offset: 1 -%}
+  {%- assign paragraph = chunk | split: "</p>" | first -%}
+  {%- assign prose = prose | append: " " | append: paragraph -%}
+{%- endfor -%}
+{%- assign prose = prose | strip_html | normalize_whitespace | strip -%}
+{%- if prose == "" %}{% assign prose = include.post.description | strip_html | strip %}{% endif -%}
+{{ prose | truncatewords: words }}
