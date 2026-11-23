@@ -46,7 +46,8 @@ neuromancer:
   # (path in your site or full URL; non-square images are cropped).
   # avatar: /assets/images/avatar.png
   # avatar_alt: Portrait of anon        # defaults to author.name
-  # Rendered in the header as <prompt_user>@<prompt_host>:~$
+  # Rendered in the header as <prompt_host>:~$, or as
+  # <prompt_user>@<prompt_host>:~$ when prompt_user is set
   prompt_user: guest
   # prompt_host: my-site     # defaults to the slugified site title
   # Subtle CRT scanline overlay

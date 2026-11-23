@@ -1,4 +1,8 @@
-{%- comment -%} The guest@host:~$ prompt used as the site title. {%- endcomment -%}
-{%- assign prompt_user = site.neuromancer.prompt_user | default: "guest" -%}
+{%- comment -%}
+  The site title as a shell prompt: <prompt_user>@<prompt_host>:~$, or just
+  <prompt_host>:~$ when neuromancer.prompt_user is not set.
+{%- endcomment -%}
+{%- assign prompt_user = site.neuromancer.prompt_user -%}
 {%- assign prompt_host = site.neuromancer.prompt_host | default: site.title | slugify -%}
-<span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>
+{%- if prompt_user %}<span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span>{% endif -%}
+<span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>

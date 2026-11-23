@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `neuromancer.prompt_user` is optional: without it the title prompt is just
+  `<prompt_host>:~$` (it used to default to `guest@`).
 
 - The site title prompt links to the home page again (alongside the `home`
   nav item).

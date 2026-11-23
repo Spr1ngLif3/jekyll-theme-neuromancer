@@ -84,7 +84,7 @@ neuromancer:
   accent: green           # green | cyan | magenta | amber | violet
   color_scheme: dark      # dark | light | auto (follow the visitor's OS)
   theme_toggle: true      # light/dark switch in the sidebar
-  prompt_user: guest      # header shows <prompt_user>@<prompt_host>:~$
+  prompt_user: guest      # optional: header shows guest@<prompt_host>:~$ (else <prompt_host>:~$)
   prompt_host: my-site    # default: slugified site title
   avatar: /assets/images/avatar.png   # square image above the nav (cropped to square)
   avatar_alt: Portrait of me          # default: author.name
