@@ -1,0 +1,23 @@
+{%- comment -%}
+  Presentation block in the sidebar, styled as a shell session.
+  Lines come from site.neuromancer.terminal (command + optional output);
+  without it: `whoami` (author name) and `cat motd` (site description).
+  Set `terminal: false` to hide it.
+{%- endcomment -%}
+{%- unless site.neuromancer.terminal == false %}
+<div class="terminal">
+  {%- if site.neuromancer.terminal %}
+  {%- for line in site.neuromancer.terminal %}
+  <p class="terminal-cmd">{{ line.command | escape }}</p>
+  {%- if line.output %}
+  <p class="terminal-out{% if forloop.first %} terminal-hero{% endif %}">{{ line.output | escape }}</p>
+  {%- endif %}
+  {%- endfor %}
+  {%- else %}
+  <p class="terminal-cmd">whoami</p>
+  <p class="terminal-out terminal-hero">{{ site.author.name | default: site.title | escape }}</p>
+  <p class="terminal-cmd">cat motd</p>
+  <p class="terminal-out">{{ site.description | escape }}</p>
+  {%- endif %}
+</div>
+{%- endunless %}

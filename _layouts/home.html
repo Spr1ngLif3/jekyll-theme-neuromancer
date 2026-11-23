@@ -1,35 +1,28 @@
 ---
 layout: default
 ---
-<section class="home-intro" aria-label="Introduction">
-  {%- assign intro = content | strip -%}
-  {%- if intro != "" %}
-  <div class="prose">{{ content }}</div>
-  {%- else %}
-  <div class="terminal" role="presentation">
-    {%- if site.neuromancer.terminal %}
-    {%- for line in site.neuromancer.terminal %}
-    <p class="terminal-cmd">{{ line.command | escape }}</p>
-    {%- if line.output %}
-    <p class="terminal-out{% if forloop.first %} terminal-hero{% endif %}">{{ line.output | escape }}</p>
-    {%- endif %}
-    {%- endfor %}
-    {%- else %}
-    <p class="terminal-cmd">whoami</p>
-    <p class="terminal-out terminal-hero">{{ site.author.name | default: site.title | escape }}</p>
-    <p class="terminal-cmd">cat motd</p>
-    <p class="terminal-out">{{ site.description | escape }}</p>
-    {%- endif %}
-  </div>
-  {%- endif %}
+{%- assign intro = content | strip %}
+{%- if intro != "" %}
+<section class="home-intro prose" aria-label="Introduction">{{ content }}</section>
+{%- endif %}
+
+{%- comment %} Posts with `pinned: true` are featured first and left out of the recent list. {% endcomment %}
+{%- assign pinned = site.posts | where_exp: "post", "post.pinned == true" %}
+{%- assign recent = site.posts | where_exp: "post", "post.pinned != true" %}
+
+{%- if pinned.size > 0 %}
+<section class="home-section" aria-labelledby="pinned-posts">
+  <h2 id="pinned-posts" class="section-title home-posts-title">{{ page.pinned_title | default: "pinned" | escape }}</h2>
+  {%- include post-list.html posts=pinned excerpts=true dates=false %}
 </section>
+{%- endif %}
 
 {%- assign home_posts = site.neuromancer.home_posts | default: 5 %}
-{%- if site.posts.size > 0 and home_posts > 0 %}
-<section class="home-posts" aria-labelledby="recent-posts">
+{%- if recent.size > 0 and home_posts > 0 %}
+<section class="home-section" aria-labelledby="recent-posts">
   <h2 id="recent-posts" class="section-title home-posts-title">{{ page.posts_title | default: "recent works" | escape }}</h2>
-  {%- include post-list.html posts=site.posts limit=home_posts excerpts=true dates=false %}
-  {%- if site.posts.size > home_posts %}
+  {%- include post-list.html posts=recent limit=home_posts excerpts=true dates=false %}
+  {%- if recent.size > home_posts %}
   <p class="more-link"><a href="{{ site.neuromancer.archive_url | default: '/blog/' | relative_url }}">cd ./archive</a></p>
   {%- endif %}
 </section>

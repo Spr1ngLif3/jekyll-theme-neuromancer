@@ -9,6 +9,7 @@
   {%- unless avatar contains "://" %}{% assign avatar = avatar | relative_url %}{% endunless %}
   <img class="site-avatar" src="{{ avatar }}" alt="{{ site.neuromancer.avatar_alt | default: site.author.name | default: site.title | escape }}" width="256" height="256" decoding="async">
   {%- endif %}
+  {%- include terminal.html %}
   <nav class="site-nav" aria-label="Main">
     <ul>
       <li><a href="{{ '/' | relative_url }}" rel="home"{% if page.url == "/" %} aria-current="page"{% endif %}>home</a></li>

@@ -223,41 +223,47 @@ figure.highlight:hover .copy-button,
   .copy-button { opacity: 1; }
 }
 
-// Terminal block (home intro) ---------------------------------------------
+// Presentation block (sidebar) ----------------------------------------------
 
 .terminal {
-  padding: 1.25rem 1.4rem;
-  background: var(--nm-bg-alt);
+  padding: 0.9rem 1rem;
+  background: var(--nm-bg-panel);
   border: 1px solid var(--nm-border);
   border-radius: var(--nm-radius);
+  font-size: 0.85rem;
+  line-height: 1.55;
 }
 
 .terminal p { margin: 0; }
 
 .terminal-cmd {
   color: var(--nm-accent);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .terminal .terminal-out {
-  margin: 0.15rem 0 1rem;
+  margin: 0.1rem 0 0.75rem;
   color: var(--nm-fg);
   white-space: pre-line;
 }
 
-// The first output (e.g. `whoami`) is the headline of the page.
+// The first output (e.g. `whoami`) stands out as a name.
 .terminal .terminal-hero {
-  margin: 0.1rem 0 1.1rem;
   color: var(--nm-fg-bright);
-  font-size: 1.9rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .terminal .terminal-out:last-child { margin-bottom: 0; }
 
-// The home page's post list heading also carries the accent.
+// Home sections (pinned, recent works) -----------------------------------------
+
 .home-posts-title { color: var(--nm-accent); }
+
+.home-section + .home-section { margin-top: 1rem; }
+.site-main > :first-child > .section-title:first-child { margin-top: 0; }
 
 // Post list --------------------------------------------------------------
 

@@ -11,7 +11,7 @@ A minimal, dark Jekyll theme inspired by hacker and cyberpunk culture.
 It's built for personal sites and blogs on GitHub Pages.
 
 - All-monospace typography (self-hosted IBM Plex Mono) with a clear size and colour hierarchy
-- Neon accents and a sticky sidebar with a terminal prompt and blinking cursor
+- Neon accents and a sticky sidebar with a terminal prompt, block cursor and presentation block
 - Blog posts with tags and previous/next links
 - Archive grouped by year, a tag index, and a client-side search box on every page
 - RSS, sitemap and SEO tags through the official Jekyll plugins
@@ -99,7 +99,7 @@ neuromancer:
   favicon: /assets/images/favicon.svg
   credit: true            # "powered by jekyll + neuromancer" in the footer
 
-  terminal:               # shell session on the home page
+  terminal:               # presentation block in the sidebar (false hides it)
     - command: whoami     # default: author name
       output: anon
     - command: cat motd   # default: site description
@@ -157,12 +157,14 @@ defaults:
 | `last_modified_at` | posts       | modification date for SEO metadata             |
 | `author`           | posts       | overrides `site.author.name`                   |
 | `comments: false`  | posts       | turns off comments for one post                |
+| `pinned: true`     | posts       | features the post in the home page "pinned" section |
 | `subtitle`         | pages       | line under the page title                      |
 | `posts_title`      | home        | heading above the post list (default "recent works") |
+| `pinned_title`     | home        | heading above pinned posts (default "pinned")  |
 | `image`            | all         | social preview image (via jekyll-seo-tag)      |
 
-If a `layout: home` page has content, that content replaces the terminal
-block.
+If a `layout: home` page has content, it is shown above the pinned and
+recent posts. Pinned posts are listed only in the "pinned" section.
 
 ## Customization
 

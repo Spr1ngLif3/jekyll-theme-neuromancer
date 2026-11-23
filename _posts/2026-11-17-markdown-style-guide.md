@@ -2,6 +2,7 @@
 title: markdown style guide
 description: Every Markdown element the theme styles, in one place.
 tags: [jekyll, reference]
+pinned: true
 ---
 
 This post shows how the theme renders common Markdown elements. Use it as

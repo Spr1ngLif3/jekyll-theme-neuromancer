@@ -2,6 +2,7 @@
 title: jacking in
 description: Welcome to neuromancer, a minimal dark Jekyll theme. Here is what it can do.
 tags: [meta, jekyll]
+pinned: true
 ---
 
 Welcome to **neuromancer**, a minimal, dark, terminal-flavoured theme for

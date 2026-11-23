@@ -7,14 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- "pinned" section at the top of the home page for posts with
+  `pinned: true` in their front matter (heading via `pinned_title`).
+  Pinned posts are left out of "recent works".
+- `terminal: false` hides the presentation block.
+
 ### Changed
 
+- The presentation block (`whoami` / `cat motd`) moved from the home page
+  into the sidebar, between the title and the navigation, on every page,
+  with a darker, more discreet background (`--nm-bg-panel`).
 - Home page lists posts in a single column at every screen size.
 - Home excerpts come from the post's paragraphs (headings, lists and code
   are skipped), cut to `neuromancer.excerpt_words` (35) and capped at the
   reading width; the `description` is used only when a post has no
   paragraphs.
-
 - Self-hosted IBM Plex Mono (SIL OFL) as the single typeface, for the same
   look on every device.
 - Clearer type hierarchy: larger scale (16px base), body text one step dimmer
