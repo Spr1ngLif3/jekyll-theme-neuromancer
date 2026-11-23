@@ -7,71 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-23
+
 ### Added
 
-- Small-screen layout (below 64rem): a top bar with a menu button, the site
-  title and a search button. The menu opens the sidebar as a drawer (the
-  page slides and dims; overlay, Esc or the button close it; focus moves
-  into the drawer and back). The search button turns the bar into the search
-  field with a cancel button, and live results cover the page. Without
-  JavaScript the sidebar and search box are stacked on top, as before.
-
+- Mobile layout (below 64rem): a top bar with a menu button, the site title
+  and a search button. The menu opens the sidebar as a drawer (the page
+  slides and dims; overlay, Esc or the button close it; focus moves into the
+  drawer and back). The search button turns the bar into a search field with
+  a cancel button, and live results cover the page. Without JavaScript the
+  sidebar and search box are stacked on top.
+- Search box on every page with live results, `/` to focus and Enter for the
+  full results page: a narrow right column on wide screens (`--nm-rail`).
+  Options: `neuromancer.search`, `neuromancer.search_url`.
 - "pinned" section at the top of the home page for posts with
-  `pinned: true` in their front matter (heading via `pinned_title`).
-  Pinned posts are left out of "recent works".
-- `terminal: false` hides the presentation block.
+  `pinned: true` (heading via `pinned_title`); pinned posts are left out of
+  "recent works".
+- Presentation block (`whoami` / `cat motd`) in the sidebar on every page;
+  `terminal: false` hides it.
+- Self-hosted IBM Plex Mono (SIL OFL), the single typeface of the theme.
+- Options and tokens: `neuromancer.excerpt_words`, `--nm-content`,
+  `--nm-rail`, `--nm-bg-panel`.
 
 ### Changed
 
-- `neuromancer.prompt_user` is optional: without it the title prompt is just
-  `<prompt_host>:~$` (it used to default to `guest@`).
-
-- The site title prompt links to the home page again (alongside the `home`
-  nav item).
-- The presentation block (`whoami` / `cat motd`) moved from the home page
-  into the sidebar, between the title and the navigation, on every page,
-  with a darker, more discreet background (`--nm-bg-panel`).
-- Home page lists posts in a single column at every screen size.
-- Home excerpts come from the post's paragraphs (headings, lists and code
-  are skipped), cut to `neuromancer.excerpt_words` (35) and capped at the
-  reading width; the `description` is used only when a post has no
-  paragraphs.
-- Self-hosted IBM Plex Mono (SIL OFL) as the single typeface, for the same
-  look on every device.
-- Clearer type hierarchy: larger scale (16px base), body text one step dimmer
-  than headings, and a smaller, quieter interface layer (nav, metadata,
-  footer).
-- Section headings (home post list, archive years, tag groups, comments)
-  are plain headings instead of small `//` labels; the home one ("recent
-  works" by default, was "recent transmissions") uses the accent colour.
-- Home terminal block: commands are shown without the `$` prompt, in the
-  accent colour, and the first output is shown as a large headline.
-- Page and post titles, and headings inside pages and posts, no longer show
-  `#` / `##` / `###` markers.
-- Tags are shown without a `#` prefix (chips and tag page headings).
-- Page titles (about, works, tags, search, 404) use the accent colour; post
-  titles keep the heading colour.
-- The archive page is titled "works" by default.
-- Post metadata shows only the date; the home page post list shows titles
-  and excerpts without dates.
-
-- Wider layout: the sidebar is pinned to the left edge and the content area
-  uses the remaining width (up to `--nm-content`, 90rem). Reading text is
-  capped at `--nm-measure` (now a line length, 72ch); code blocks, tables
+- Wider layout: the sidebar is pinned to the left edge and the content uses
+  the remaining width (up to `--nm-content`, 90rem). Reading text is capped
+  at `--nm-measure`, which is now a line length (72ch); code blocks, tables
   and figures may use the full width.
-- Search moved from a nav page to a box on every page: in a narrow right
-  column (`--nm-rail`) mirroring the sidebar on screens from 64rem, and as a
-  full-width bar under the header on smaller ones. It shows live results, opens the full results
-  page on Enter and is focused with `/`. New options: `neuromancer.search`,
-  `neuromancer.search_url`.
-- The header cursor no longer blinks.
-- On small screens the theme toggle sits next to the feed links.
+- Clearer type hierarchy: 16px base, body text one step dimmer than
+  headings, a smaller and quieter interface layer. No `#` markers on titles
+  and headings, no `//` labels on section headings, no `#` on tags.
+- Page titles (about, works, tags, search, 404) and the home section
+  headings use the accent colour; post titles keep the heading colour.
+- Home page: posts in a single column with excerpts taken from the post's
+  paragraphs (35 words, code and headings skipped, `description` as
+  fallback) and no dates; "recent works" replaces "recent transmissions".
+- Post metadata shows only the date.
+- The archive page is titled "works" by default.
+- The title prompt is `<prompt_host>:~$`; `prompt_user` is optional and adds
+  `<prompt_user>@` in front. The prompt links home, and its cursor no longer
+  blinks.
 
 ### Removed
 
-- `grep -i` label on the search page.
+- Search link in the navigation and the `grep -i` label on the search page.
 - Reading time and author in post metadata (`neuromancer.reading_time`,
   `neuromancer.words_per_minute`).
+- Multi-column home post list.
+
+### Upgrading from 0.2.0
+
+- Remove the `search` entry from `neuromancer.nav` (search has its own box).
+- In `blog.md`, set `title: works` if you want the new default name.
+- `reading_time` and `words_per_minute` can be deleted from `_config.yml`.
+- Custom CSS using `--nm-measure` as a column width should switch to
+  `--nm-content`; `--nm-measure` is now the reading line length.
+- Without `prompt_user` the title loses its `guest@` prefix; set
+  `prompt_user: guest` to keep it.
 
 ## [0.2.0] - 2026-11-22
 
@@ -133,6 +126,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Accessibility: skip link, visible focus styles, reduced-motion support,
   print stylesheet.
 
-[Unreleased]: https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/releases/tag/v0.2.0
 [0.1.0]: https://github.com/Spr1ngLif3/jekyll-theme-neuromancer/tree/14b6386

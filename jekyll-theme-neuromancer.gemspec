@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-neuromancer"
-  spec.version       = "0.2.0"
+  spec.version       = "0.3.0"
   spec.authors       = ["Spr1ngLif3"]
 
   spec.summary       = "A minimal dark Jekyll theme inspired by hacker and cyberpunk culture."
