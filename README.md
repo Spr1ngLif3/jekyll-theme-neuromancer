@@ -178,7 +178,7 @@ recent posts. Pinned posts are listed only in the "pinned" section.
     --nm-accent-soft: rgba(57, 255, 20, 0.12);
     --nm-font-body: system-ui, sans-serif;   // sans-serif instead of mono
     --nm-content: 72rem;                     // wider content area
-    --nm-measure: 80ch;                      // longer reading lines
+    --nm-measure: 80ch;                      // longer home page excerpts
     --nm-avatar-size: 10rem;                 // bigger sidebar image
   }
   ```
