@@ -5,11 +5,10 @@
   <body class="layout-{{ page.layout | default: 'default' }}">
     <a class="skip-link" href="#main">Skip to content</a>
     {%- assign search = true %}{% if site.neuromancer.search == false %}{% assign search = false %}{% endif %}
-    <div class="site">
+    <div class="site{% unless search %} site--no-search{% endunless %}">
       {%- include header.html -%}
-      {%- if search %}
-      <aside class="site-rail" aria-label="Search">{% include search.html %}</aside>
-      {%- endif %}
+      {%- include bar.html search=search -%}
+      <div class="site-mask" hidden></div>
       <div class="site-content">
         <main id="main" class="site-main" tabindex="-1">
           {{ content }}

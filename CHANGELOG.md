@@ -9,12 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Small-screen layout (below 64rem): a top bar with a menu button, the site
+  title and a search button. The menu opens the sidebar as a drawer (the
+  page slides and dims; overlay, Esc or the button close it; focus moves
+  into the drawer and back). The search button turns the bar into the search
+  field with a cancel button, and live results cover the page. Without
+  JavaScript the sidebar and search box are stacked on top, as before.
+
 - "pinned" section at the top of the home page for posts with
   `pinned: true` in their front matter (heading via `pinned_title`).
   Pinned posts are left out of "recent works".
 - `terminal: false` hides the presentation block.
 
 ### Changed
+
 
 - The site title prompt links to the home page again (alongside the `home`
   nav item).

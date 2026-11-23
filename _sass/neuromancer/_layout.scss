@@ -1,7 +1,8 @@
 // Page shell
-// - small screens: header, search bar and content stacked
 // - 64rem+: three columns, sidebar | content | search rail; both side
 //   columns are sticky and full height
+// - smaller screens: a top bar (menu, title, search) and the sidebar as a
+//   drawer; without JavaScript the sidebar is simply stacked on top
 
 .site {
   display: flex;
@@ -17,6 +18,34 @@
   gap: 0.75rem;
   padding: 1.25rem var(--nm-gutter);
   border-bottom: 1px solid var(--nm-border);
+}
+
+// Vertical sidebar look, shared by the wide-screen column and the drawer.
+@mixin nm-sidebar-column {
+  gap: 1.75rem;
+  padding: 1.75rem 1.25rem;
+  border-bottom: 0;
+  border-right: 1px solid var(--nm-border);
+  overflow-y: auto;
+  scrollbar-width: thin; // keeps the prompt on one line if the sidebar scrolls
+
+  .site-nav ul,
+  .social-links {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .site-avatar {
+    align-self: center;
+    width: var(--nm-avatar-size);
+  }
+
+  .site-header-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: auto;
+  }
 }
 
 // Links home; keeps its look (no underline or highlight), the glitch on
@@ -104,12 +133,55 @@
 .theme-toggle[data-current="light"] .theme-light,
 .theme-toggle[data-current="dark"] .theme-dark { color: var(--nm-accent); }
 
-// Search rail -----------------------------------------------------------------
+// Site bar --------------------------------------------------------------------
+// Search rail on wide screens, top bar on small ones (see bar.html).
 
-.site-rail {
+.site-bar {
   display: flex;
   justify-content: flex-end;
   padding: 1.25rem var(--nm-gutter) 0;
+}
+
+// Top bar controls: only shown on small screens with JavaScript.
+.bar-btn,
+.bar-title,
+.bar-cancel { display: none; }
+
+.bar-btn {
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--nm-muted);
+  cursor: pointer;
+}
+
+.bar-btn:hover { color: var(--nm-accent); }
+
+.bar-cancel {
+  flex: none;
+  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+  border: 0;
+  background: none;
+  color: var(--nm-accent);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+// Dims the page while the drawer is open.
+.site-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.55);
 }
 
 // Content area ---------------------------------------------------------------
@@ -145,8 +217,10 @@
     grid-template-columns: var(--nm-sidebar) minmax(0, 1fr) var(--nm-rail);
   }
 
+  .site--no-search { grid-template-columns: var(--nm-sidebar) minmax(0, 1fr); }
+
   .site-header,
-  .site-rail {
+  .site-bar {
     position: sticky;
     top: 0;
     grid-row: 1;
@@ -154,38 +228,15 @@
     height: 100vh;
   }
 
-  .site-header {
-    overflow-y: auto;
-    scrollbar-width: thin; // keeps the prompt on one line if the sidebar scrolls
-    gap: 1.75rem;
-    padding: 1.75rem 1.25rem;
-    border-bottom: 0;
-    border-right: 1px solid var(--nm-border);
-  }
+  .site-header { @include nm-sidebar-column; }
 
-  .site-nav ul,
-  .site-header .social-links {
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .site-avatar {
-    align-self: center;
-    width: var(--nm-avatar-size);
-  }
-
-  .site-header-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-top: auto;
-  }
-
-  .site-rail {
+  .site-bar {
     grid-column: 3;
     display: block;
     padding: 2rem 1rem 2rem 0;
   }
+
+  .site--no-search .site-bar { display: none; }
 
   .site-content {
     grid-column: 2;
@@ -195,6 +246,85 @@
   }
 
   .site-main { padding-top: 2rem; }
+}
+
+// Small screens with JavaScript: top bar and drawer ------------------------------
+
+@media (max-width: 63.99rem) {
+  .js .site-header {
+    @include nm-sidebar-column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 70;
+    width: min(var(--nm-sidebar), 85vw);
+    background: var(--nm-bg);
+    transform: translateX(-100%);
+    visibility: hidden; // keeps the closed drawer out of the tab order
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .js[data-sidebar-open] .site-header {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.3s ease;
+  }
+
+  // The page slides along with the drawer.
+  .js .site-bar,
+  .js .site-content { transition: transform 0.3s ease; }
+
+  .js[data-sidebar-open] .site-bar,
+  .js[data-sidebar-open] .site-content { transform: translateX(min(var(--nm-sidebar), 85vw)); }
+
+  .js[data-sidebar-open] body { overflow: hidden; }
+
+  .js .site-bar {
+    position: relative;
+    align-items: center;
+    height: 3rem;
+    padding: 0 0.25rem;
+    border-bottom: 1px solid var(--nm-border);
+  }
+
+  .js .bar-btn { display: inline-flex; }
+
+  .js .bar-title {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Search mode: the bar turns into the search field.
+  .js .site-bar .site-search { display: none; }
+
+  .js .site-bar[data-searching] .site-search {
+    display: block;
+    flex: 1;
+    position: static; // results span the whole bar
+    margin-left: 0.75rem;
+  }
+
+  .js .site-bar[data-searching] .bar-cancel { display: block; }
+
+  .js .site-bar[data-searching] .bar-btn,
+  .js .site-bar[data-searching] .bar-title { display: none; }
+
+  // Results cover the page below the bar.
+  .js .site-bar .site-search-results {
+    top: 100%;
+    min-height: calc(100vh - 3rem);
+    max-height: none;
+    padding: 0.75rem calc(var(--nm-gutter) - 0.8rem);
+    border: 0;
+    border-radius: 0;
+    background: var(--nm-bg);
+  }
 }
 
 // Search box ------------------------------------------------------------------

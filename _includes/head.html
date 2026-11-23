@@ -4,7 +4,9 @@
   <meta name="color-scheme" content="{% if color_scheme == 'auto' %}dark light{% else %}{{ color_scheme }}{% endif %}">
   <meta name="theme-color" content="{% if color_scheme == 'light' %}#f5f6f8{% else %}#07080c{% endif %}">
   <script>
-    // Apply the visitor's saved theme before first paint (see theme toggle).
+    // Mark JavaScript as available (enables the mobile menu) and apply the
+    // visitor's saved theme before first paint (see theme toggle).
+    document.documentElement.classList.add("js");
     try {
       var nmTheme = localStorage.getItem("nm-theme");
       if (nmTheme === "light" || nmTheme === "dark") document.documentElement.setAttribute("data-theme", nmTheme);

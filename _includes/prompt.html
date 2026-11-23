@@ -1,0 +1,4 @@
+{%- comment -%} The guest@host:~$ prompt used as the site title. {%- endcomment -%}
+{%- assign prompt_user = site.neuromancer.prompt_user | default: "guest" -%}
+{%- assign prompt_host = site.neuromancer.prompt_host | default: site.title | slugify -%}
+<span class="prompt-user">{{ prompt_user | escape }}</span><span class="prompt-at">@</span><span class="prompt-host">{{ prompt_host | escape }}</span><span class="prompt-path">:~$</span><span class="cursor" aria-hidden="true"></span>

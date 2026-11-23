@@ -3,6 +3,7 @@
  * - language labels and copy buttons on code blocks
  * - permalink anchors on headings inside posts
  * - light/dark theme toggle (choice saved in localStorage)
+ * - drawer menu on small screens (top bar button)
  * The site is fully usable without this script.
  */
 (function () {
@@ -84,11 +85,44 @@
     button.hidden = false;
   }
 
+  // Small screens: the sidebar opens as a drawer from the top bar's menu button.
+  function setupMenu(toggle) {
+    var sidebar = document.getElementById(toggle.getAttribute("aria-controls"));
+    var mask = document.querySelector(".site-mask");
+    if (!sidebar || !mask) return;
+
+    function isOpen() { return root.hasAttribute("data-sidebar-open"); }
+
+    function setOpen(open, restoreFocus) {
+      root.toggleAttribute("data-sidebar-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      mask.hidden = !open;
+      if (open) {
+        var first = sidebar.querySelector("a, button");
+        if (first) first.focus({ preventScroll: true });
+      } else if (restoreFocus) {
+        toggle.focus({ preventScroll: true });
+      }
+    }
+
+    toggle.addEventListener("click", function () { setOpen(!isOpen(), true); });
+    mask.addEventListener("click", function () { setOpen(false, true); });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && isOpen()) setOpen(false, true);
+    });
+    // Leaving the small-screen layout closes the drawer.
+    window.matchMedia("(min-width: 64rem)").addEventListener("change", function (event) {
+      if (event.matches && isOpen()) setOpen(false, false);
+    });
+  }
+
   function init() {
     document.querySelectorAll("div.highlighter-rouge, figure.highlight").forEach(enhanceCodeBlock);
     document.querySelectorAll(".post .prose :is(h2, h3, h4)[id]").forEach(addHeadingAnchor);
     var toggle = document.querySelector(".theme-toggle");
     if (toggle) setupThemeToggle(toggle);
+    var menu = document.querySelector("[data-menu-toggle]");
+    if (menu) setupMenu(menu);
   }
 
   if (document.readyState === "loading") {

@@ -12,6 +12,7 @@ It's built for personal sites and blogs on GitHub Pages.
 
 - All-monospace typography (self-hosted IBM Plex Mono) with a clear size and colour hierarchy
 - Neon accents and a sticky sidebar with a terminal prompt, block cursor and presentation block
+- Mobile top bar with a slide-in menu drawer and a full-screen search mode
 - Blog posts with tags and previous/next links
 - Archive grouped by year, a tag index, and a client-side search box on every page
 - RSS, sitemap and SEO tags through the official Jekyll plugins

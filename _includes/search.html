@@ -1,6 +1,6 @@
 {%- comment -%}
-  Search box (right rail on wide screens). Live results appear below it;
-  Enter (or no JavaScript) opens the full results page.
+  Search box, inside the site bar (see bar.html). Live results appear below
+  it; Enter (or no JavaScript) opens the full results page.
 {%- endcomment -%}
 <form class="site-search" role="search" action="{{ site.neuromancer.search_url | default: '/search/' | relative_url }}" data-search-index="{{ '/assets/search.json' | relative_url }}">
   <input type="search" name="q" placeholder="search" aria-label="Search posts" autocomplete="off" spellcheck="false">

@@ -1,6 +1,7 @@
 /*!
  * Neuromancer theme — client-side search.
- * - header box: live results in a dropdown, "/" focuses it
+ * - search box: live results in a dropdown, "/" focuses it; on small
+ *   screens the top bar's search button turns the bar into the field
  * - results page: full list, synced with ?q= in the URL
  * The index (/assets/search.json) is fetched once, on first use. Results are
  * rendered with DOM APIs (no innerHTML) so post content can never inject markup.
@@ -69,9 +70,29 @@
     var panel = form.querySelector(".site-search-results");
     var status = panel.querySelector(".site-search-status");
     var list = panel.querySelector("ul");
+    var bar = form.closest(".site-bar");
+    var trigger = bar && bar.querySelector("[data-search-trigger]");
+    var cancel = bar && bar.querySelector("[data-search-cancel]");
     var LIMIT = 8;
     var latest = 0;
     var debounce;
+
+    // Small screens: search mode replaces the bar's title and buttons.
+    function openSearch() {
+      // Only where the search button is shown (small screens).
+      if (trigger && trigger.offsetParent !== null) bar.setAttribute("data-searching", "");
+      input.focus();
+    }
+
+    function closeSearch() {
+      if (bar) bar.removeAttribute("data-searching");
+      input.value = "";
+      panel.hidden = true;
+      if (trigger) trigger.focus({ preventScroll: true });
+    }
+
+    if (trigger) trigger.addEventListener("click", openSearch);
+    if (cancel) cancel.addEventListener("click", closeSearch);
 
     function update() {
       var query = input.value.trim();
@@ -108,14 +129,17 @@
       if (!form.contains(event.relatedTarget)) panel.hidden = true;
     });
     form.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") { panel.hidden = true; input.blur(); }
+      if (event.key !== "Escape") return;
+      if (bar && bar.hasAttribute("data-searching")) { closeSearch(); return; }
+      panel.hidden = true;
+      input.blur();
     });
     document.addEventListener("keydown", function (event) {
       var target = event.target;
       if (event.key !== "/" || event.ctrlKey || event.metaKey || event.altKey) return;
       if (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return;
       event.preventDefault();
-      input.focus();
+      openSearch();
     });
   }
 
